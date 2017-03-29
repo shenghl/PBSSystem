@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pbs.base.dao.mapper.PbsBikeInfoMapper" >
+  <resultMap id="BaseResultMap" type="pbs.base.pojo.po.PbsBikeInfo" >
+    <id column="bike_id" property="bikeId" jdbcType="INTEGER" />
+    <result column="produce_date" property="produceDate" jdbcType="TIMESTAMP" />
+    <result column="factory" property="factory" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bike_id, produce_date, factory, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pbs.base.pojo.po.PbsBikeInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pbs_bike_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pbs_bike_info
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pbs_bike_info
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pbs.base.pojo.po.PbsBikeInfoExample" >
+    delete from pbs_bike_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pbs.base.pojo.po.PbsBikeInfo" >
+    insert into pbs_bike_info (bike_id, produce_date, factory, 
+      state)
+    values (#{bikeId,jdbcType=INTEGER}, #{produceDate,jdbcType=TIMESTAMP}, #{factory,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pbs.base.pojo.po.PbsBikeInfo" >
+    insert into pbs_bike_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bikeId != null" >
+        bike_id,
+      </if>
+      <if test="produceDate != null" >
+        produce_date,
+      </if>
+      <if test="factory != null" >
+        factory,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bikeId != null" >
+        #{bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="produceDate != null" >
+        #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pbs.base.pojo.po.PbsBikeInfoExample" resultType="java.lang.Integer" >
+    select count(*) from pbs_bike_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pbs_bike_info
+    <set >
+      <if test="record.bikeId != null" >
+        bike_id = #{record.bikeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.produceDate != null" >
+        produce_date = #{record.produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.factory != null" >
+        factory = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pbs_bike_info
+    set bike_id = #{record.bikeId,jdbcType=INTEGER},
+      produce_date = #{record.produceDate,jdbcType=TIMESTAMP},
+      factory = #{record.factory,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pbs.base.pojo.po.PbsBikeInfo" >
+    update pbs_bike_info
+    <set >
+      <if test="produceDate != null" >
+        produce_date = #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factory != null" >
+        factory = #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pbs.base.pojo.po.PbsBikeInfo" >
+    update pbs_bike_info
+    set produce_date = #{produceDate,jdbcType=TIMESTAMP},
+      factory = #{factory,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where bike_id = #{bikeId,jdbcType=INTEGER}
+  </update>
+</mapper>
