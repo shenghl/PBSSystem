@@ -10,7 +10,7 @@ public interface PbsBikeInfoMapper {
 
     int deleteByExample(PbsBikeInfoExample example);
 
-    int deleteByPrimaryKey(Integer bikeId);
+    int deleteByPrimaryKey(Long id);
 
     int insert(PbsBikeInfo record);
 
@@ -18,7 +18,7 @@ public interface PbsBikeInfoMapper {
 
     List<PbsBikeInfo> selectByExample(PbsBikeInfoExample example);
 
-    PbsBikeInfo selectByPrimaryKey(Integer bikeId);
+    PbsBikeInfo selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") PbsBikeInfo record, @Param("example") PbsBikeInfoExample example);
 

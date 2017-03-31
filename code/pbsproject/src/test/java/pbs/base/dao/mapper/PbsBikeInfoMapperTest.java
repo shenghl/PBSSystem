@@ -28,14 +28,7 @@ public class PbsBikeInfoMapperTest extends TestCase {
 
 	//根据主键查询
 	public void testSelectByPrimaryKey() {
-		applicationContext = new ClassPathXmlApplicationContext(new String[]{
-				"spring/applicationContext.xml","spring/applicationContext-base-dao.xml"
-		});
-		
-		pbsBikeInfoMapper = (PbsBikeInfoMapper) applicationContext.getBean("pbsBikeInfoMapper");
-		
-		PbsBikeInfo pbsBikeInfo = pbsBikeInfoMapper.selectByPrimaryKey(1);
-		System.out.println(pbsBikeInfo);
+
 	}
 
 	public void testUpdateByPrimaryKeySelective() {
