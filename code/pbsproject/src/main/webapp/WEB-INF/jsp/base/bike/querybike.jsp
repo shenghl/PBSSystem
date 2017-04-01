@@ -69,7 +69,7 @@
 			columns : columns_v,
 			pagination : true,//是否显示分页
 			rownumbers : true,//是否显示行号
-			pageList:[15,30,50],
+			pageList:[5,10,15],
 			toolbar : toolbar_v
 		});
 	});

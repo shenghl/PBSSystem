@@ -20,4 +20,10 @@ public class BikeServiceImpl implements BikeService {
 		return pbsBikeInfoMapperCustom.findPbsBikeInfoList(pbsBikeInfoQueryVo);
 	}
 
+	@Override
+	public int findPbsBikeInfoCount(PbsBikeInfoQueryVo pbsBikeInfoQueryVo)
+			throws Exception {
+		return pbsBikeInfoMapperCustom.findPbsBikeInfoCount(pbsBikeInfoQueryVo);
+	}
+
 }

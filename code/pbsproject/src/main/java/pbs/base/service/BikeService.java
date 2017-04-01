@@ -8,4 +8,6 @@ import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
 public interface BikeService {
 
 	public List<PbsBikeInfoCustom> findPbsBikeInfoList(PbsBikeInfoQueryVo pbsBikeInfoQueryVo) throws Exception;
+	
+	public int findPbsBikeInfoCount(PbsBikeInfoQueryVo pbsBikeInfoQueryVo) throws Exception;
 }

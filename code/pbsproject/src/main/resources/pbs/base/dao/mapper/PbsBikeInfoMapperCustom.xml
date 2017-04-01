@@ -35,6 +35,17 @@
   <where>
 	<include refid="query_bike"></include>
   </where>
+  limit ${pageQuery.start},${pageQuery.rows}
+	</select>
+	
+	<select id="findPbsBikeInfoCount" parameterType="pbs.base.pojo.vo.PbsBikeInfoQueryVo"
+	resultType="int">
+	SELECT count(*)
+	FROM
+	  pbs_bike_info bike
+	<where>
+		<include refid="query_bike"></include>
+	</where>
 	</select>
 
 </mapper>
