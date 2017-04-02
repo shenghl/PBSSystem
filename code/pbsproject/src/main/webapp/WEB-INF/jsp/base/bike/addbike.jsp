@@ -101,7 +101,7 @@
 								<TD height=30 width="15%" align=right >日期：</TD>
 								<TD class=category width="35%">
 								<div>
-								<input type="date" id="bike_rq" name=""  />
+								<input type="date" id="bike_rq" name="pbsBikeInfoCustom.rq"  />
 								</div>
 								<div id="sysuser_usernameTip"></div>
 								</TD>

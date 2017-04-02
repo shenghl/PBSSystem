@@ -19,7 +19,18 @@ public class PbsBikeInfoMapperTest extends TestCase {
 	}
 
 	public void testInsert() {
-		fail("Not yet implemented");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {
+				"spring/applicationContext.xml", "spring/applicationContext-base-dao.xml"
+
+		});
+		pbsBikeInfoMapper = (PbsBikeInfoMapper) applicationContext.getBean("pbsBikeInfoMapper");
+		PbsBikeInfo bike = new PbsBikeInfo();
+		bike.setBm("1234");
+		bike.setCj("飞达");
+		bike.setZt("入库");
+		bike.setRq("2013-02-01");
+		pbsBikeInfoMapper.insert(bike);
+		System.out.println(bike);
 	}
 
 	public void testSelectByExample() {
@@ -33,7 +44,7 @@ public class PbsBikeInfoMapperTest extends TestCase {
 
 		});
 		pbsBikeInfoMapper = (PbsBikeInfoMapper) applicationContext.getBean("pbsBikeInfoMapper");
-		PbsBikeInfo bike = pbsBikeInfoMapper.selectByPrimaryKey((long) 1);
+		PbsBikeInfo bike = pbsBikeInfoMapper.selectByPrimaryKey((long) 2);
 		System.out.println(bike);
 	}
 

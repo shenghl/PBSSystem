@@ -7,7 +7,7 @@ public class PbsBikeInfo {
 
     private String bm;
 
-    private Date rq;
+    private String rq;
 
     private String cj;
 
@@ -35,11 +35,11 @@ public class PbsBikeInfo {
         this.bm = bm == null ? null : bm.trim();
     }
 
-    public Date getRq() {
+    public String getRq() {
         return rq;
     }
 
-    public void setRq(Date rq) {
+    public void setRq(String rq) {
         this.rq = rq;
     }
 
