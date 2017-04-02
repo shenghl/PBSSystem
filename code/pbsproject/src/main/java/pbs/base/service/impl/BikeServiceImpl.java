@@ -2,6 +2,8 @@ package pbs.base.service.impl;
 
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pbs.base.dao.mapper.PbsBikeInfoMapper;
@@ -10,6 +12,7 @@ import pbs.base.pojo.po.PbsBikeInfo;
 import pbs.base.pojo.po.PbsBikeInfoExample;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
+import pbs.base.process.result.ExceptionResultInfo;
 import pbs.base.process.result.ResultInfo;
 import pbs.base.service.BikeService;
 
@@ -52,7 +55,13 @@ public class BikeServiceImpl implements BikeService {
 		PbsBikeInfo pbsBikeInfo = this.findPbsBikeInfoByBikebm(pbsBikeInfoCustom.getBm());
 
 		if(pbsBikeInfo!=null){
-			throw new Exception("编码重复");
+			//throw new Exception("编码重复");
+			
+			//使用系统自定义异常类
+			ResultInfo resultInfo = new ResultInfo();
+			resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+			resultInfo.setMessage("编码重复");
+			throw new ExceptionResultInfo(resultInfo);
 		}
 		
 		pbsBikeInfoMapper.insert(pbsBikeInfoCustom);

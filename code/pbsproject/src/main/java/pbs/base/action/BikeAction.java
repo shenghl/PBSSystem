@@ -1,8 +1,6 @@
 package pbs.base.action;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,8 @@ import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
 import pbs.base.process.result.DataGridResultInfo;
+import pbs.base.process.result.ResultInfo;
+import pbs.base.process.result.SubmitResultInfo;
 import pbs.base.service.BikeService;
 
 @Controller
@@ -27,7 +27,6 @@ public class BikeAction {
 
 	@RequestMapping("/querybike")
 	public String queryBike(Model model)throws Exception{
-		
 		return "/base/bike/querybike";
 	}
 	
@@ -63,22 +62,34 @@ public class BikeAction {
 	
 	//添加用户提交
 	@RequestMapping("/addbikesubmit")
-	public @ResponseBody Map<String,Object> addBikeSubmit(PbsBikeInfoQueryVo pbsBikeInfoQueryVo)throws Exception{
+	public @ResponseBody SubmitResultInfo addBikeSubmit(PbsBikeInfoQueryVo pbsBikeInfoQueryVo)throws Exception{
 		
-		String message = "操作成功!!";
-		int type=0;//成功
-		try {
+//		String message = "操作成功!!";
+//		int type=0;//成功
+		
+		ResultInfo resultInfo = new ResultInfo();
+		resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+		resultInfo.setMessage("操作成功");
+		/*try {
 			bikeService.insertPbsBikeInfo(pbsBikeInfoQueryVo.getPbsBikeInfoCustom());
 		} catch (Exception e) {
 			e.printStackTrace();
-			message = e.getMessage();
-			type=1;//失败
-		}
-		
-		Map<String, Object> result_map = new HashMap<String, Object>();
-		result_map.put("type", type);
-		result_map.put("message", message);
-		
-		return result_map;
+//			message = e.getMessage();
+//			type=1;//失败
+			if(e instanceof ExceptionResultInfo){
+				resultInfo = ((ExceptionResultInfo)e).getResultInfo();
+			}else{
+				//从新构造"未知错误"异常
+				resultInfo = new ResultInfo();
+				resultInfo.setMessage("未知错误");
+				resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+			}
+		}*/
+		bikeService.insertPbsBikeInfo(pbsBikeInfoQueryVo.getPbsBikeInfoCustom());
+//		Map<String, Object> result_map = new HashMap<String, Object>();
+//		result_map.put("type", type);
+//		result_map.put("message", message);
+		SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+		return submitResultInfo;
 	}
 }
