@@ -1,6 +1,8 @@
 package pbs.base.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,5 +52,33 @@ public class BikeAction {
 		dataGridResultInfo.setTotal(total);
 		dataGridResultInfo.setRows(list);
 		return dataGridResultInfo;
+	}
+	
+	//添加用户页面
+	@RequestMapping("/addbike")
+	public String addBike(Model model)throws Exception{
+		
+		return "/base/bike/addbike";
+	}
+	
+	//添加用户提交
+	@RequestMapping("/addbikesubmit")
+	public @ResponseBody Map<String,Object> addBikeSubmit(PbsBikeInfoQueryVo pbsBikeInfoQueryVo)throws Exception{
+		
+		String message = "操作成功!!";
+		int type=0;//成功
+		try {
+			bikeService.insertPbsBikeInfo(pbsBikeInfoQueryVo.getPbsBikeInfoCustom());
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = e.getMessage();
+			type=1;//失败
+		}
+		
+		Map<String, Object> result_map = new HashMap<String, Object>();
+		result_map.put("type", type);
+		result_map.put("message", message);
+		
+		return result_map;
 	}
 }

@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jsp/base/tag.jsp"%>
 <html>
 <head>
-<title>药品采购平台</title>
+<title>公共自行车信息管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 
@@ -96,7 +96,7 @@
 
 		</SPAN> <SPAN style="padding-left: 10px; font-size: 16px;"><IMG
 			align="absmiddle" src="images/blocks.gif" width="20" height="20">
-			医药集中采购系统</SPAN> <SPAN style="padding-left: 15px;" id="News"></SPAN>
+			公共自行车信息管理系统</SPAN> <SPAN style="padding-left: 15px;" id="News"></SPAN>
 	</DIV>
 
 	<DIV style="background: rgb(210, 224, 242); height: 30px;" split="false"
