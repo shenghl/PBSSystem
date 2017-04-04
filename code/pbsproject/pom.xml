@@ -122,9 +122,9 @@
 				</configuration>
 			</plugin>
 			
-			<!-- tomcat运行插件 
+			<!-- tomcat运行插件 -->
 			<plugin>
-				<group Id>org.codehaus.cargo</groupId>
+				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
 				<version>1.2.3</version>
 				<configuration>
@@ -146,7 +146,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 
 
 		</plugins>

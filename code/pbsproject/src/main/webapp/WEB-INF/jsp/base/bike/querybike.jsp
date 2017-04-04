@@ -42,6 +42,20 @@
 		field : 'cz',//对应json中的key
 		title : '车桩',
 		width : 120
+	},{
+		field : 'opt1',//对应json中的key
+		title : '删除',
+		width : 120,
+		formatter : function(value, row, index){
+			return "<a href=javascript:deletebike('"+row.bm+"')>删除</a>"
+		}
+	},{
+		field : 'opt2',//对应json中的key
+		title : '修改',
+		width : 120,
+		formatter : function(value, row, index){
+			return "<a href=javascript:editbike('"+row.bm+"')>修改</a>"
+		}
 	}] ];
 
 	//定义 datagird工具
@@ -81,6 +95,45 @@
 		var formdata = $("#bikequeryForm").serializeJson();
 		//console.log(formdata);
 		$('#bikeinfolist').datagrid('load',formdata);
+	}
+	
+	//删除用户方法
+	function deletebike(bm){
+
+		//第一个参数是提示信息，第二个参数，取消执行的函数指针，第三个参是，确定执行的函数指针
+		_confirm('您确认删除吗？',null,function (){
+
+			//将要删除的id赋值给deleteid，deleteid在sysuserdeleteform中
+			$("#delete_bm").val(bm);
+			//使用ajax的from提交执行删除
+			//sysuserdeleteform：form的id，userdel_callback：删除回调函数，
+			//第三个参数是url的参数
+			//第四个参数是datatype，表示服务器返回的类型
+			jquerySubByFId('sysuserdeleteform',bikedel_callback,null,"json");
+			
+			
+		});
+	}
+	
+	//删除用户的回调
+	function bikedel_callback(data){
+		message_alert(data);
+		//刷新 页面
+		//在提交成功后重新加载 datagrid
+		//取出提交结果
+		var type=data.resultInfo.type;
+		if(type==1){
+			//成功结果
+			//重新加载 datagrid
+			querybike();
+		}
+	}
+	
+	//修改用户
+	function editbike(bm){
+		
+		//打开修改窗口
+		createmodalwindow("修改自行车信息", 800, 250, '${baseurl}bike/editbike.action?bm='+bm);
 	}
 </script>
 
@@ -128,6 +181,9 @@
 			</TR>
 		</TBODY>
 	</TABLE>
+</form>
+<form id="sysuserdeleteform" action="${baseurl}bike/deletebike.action" method="post">
+  <input type="hidden" id="delete_bm" name="bm" />
 </form>
 </body>
 </html>

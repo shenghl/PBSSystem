@@ -2,8 +2,7 @@ package pbs.base.service.impl;
 
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pbs.base.dao.mapper.PbsBikeInfoMapper;
@@ -12,8 +11,10 @@ import pbs.base.pojo.po.PbsBikeInfo;
 import pbs.base.pojo.po.PbsBikeInfoExample;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
+import pbs.base.process.context.Config;
 import pbs.base.process.result.ExceptionResultInfo;
 import pbs.base.process.result.ResultInfo;
+import pbs.base.process.result.ResultUtil;
 import pbs.base.service.BikeService;
 
 public class BikeServiceImpl implements BikeService {
@@ -65,6 +66,40 @@ public class BikeServiceImpl implements BikeService {
 		}
 		
 		pbsBikeInfoMapper.insert(pbsBikeInfoCustom);
+	}
+
+	@Override
+	public void deletPbsBikeInfo(String bm) throws Exception {
+
+		PbsBikeInfo pbsBikeInfo = this.findPbsBikeInfoByBikebm(bm);
+		if(pbsBikeInfo==null){
+			
+			ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 212, null));
+		}
+		
+		pbsBikeInfoMapper.deleteByPrimaryKey(pbsBikeInfo.getId());
+	}
+
+	@Override
+	public void updatePbsBikeInfo(PbsBikeInfoCustom pbsBikeInfoCustom)
+			throws Exception {
+		PbsBikeInfo pbsBikeInfo = this.findPbsBikeInfoByBikebm(pbsBikeInfoCustom.getBm());	
+		if(pbsBikeInfo==null){
+			ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 212, null));
+		}
+		//pbsBikeInfo.setId(pbsBikeInfoCustom.getId());
+		pbsBikeInfo.setBm(pbsBikeInfoCustom.getBm());
+		pbsBikeInfo.setCj(pbsBikeInfoCustom.getCj());
+		pbsBikeInfo.setRq(pbsBikeInfoCustom.getRq());
+		pbsBikeInfo.setZt(pbsBikeInfoCustom.getZt());
+		pbsBikeInfo.setDt(pbsBikeInfoCustom.getDt());
+		pbsBikeInfo.setZd(pbsBikeInfoCustom.getZd());
+		pbsBikeInfo.setCz(pbsBikeInfoCustom.getCz());
+		
+//		BeanUtils.copyProperties(pbsBikeInfoCustom, pbsBikeInfo);
+		
+		pbsBikeInfoMapper.updateByPrimaryKey(pbsBikeInfo);
+		
 	}
 
 }

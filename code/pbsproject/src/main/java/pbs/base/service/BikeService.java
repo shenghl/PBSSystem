@@ -15,4 +15,10 @@ public interface BikeService {
 	public PbsBikeInfo findPbsBikeInfoByBikebm(String bm) throws Exception;
 	
 	public void insertPbsBikeInfo(PbsBikeInfoCustom pbsBikeInfoCustom) throws Exception;
+	
+	//删除用户
+	public void deletPbsBikeInfo(String bm) throws Exception;
+	
+	//修改用户
+	public void updatePbsBikeInfo(PbsBikeInfoCustom pbsBikeInfoCustom) throws Exception;
 }

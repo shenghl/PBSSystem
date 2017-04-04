@@ -8,11 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pbs.base.pojo.po.PbsBikeInfo;
 import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
+import pbs.base.process.context.Config;
 import pbs.base.process.result.DataGridResultInfo;
 import pbs.base.process.result.ResultInfo;
+import pbs.base.process.result.ResultUtil;
 import pbs.base.process.result.SubmitResultInfo;
 import pbs.base.service.BikeService;
 
@@ -91,5 +94,27 @@ public class BikeAction {
 //		result_map.put("message", message);
 		SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
 		return submitResultInfo;
+	}
+	
+	@RequestMapping("/deletebike")
+	public @ResponseBody SubmitResultInfo deletePbsBikeInfo(String bm) throws Exception{
+		bikeService.deletPbsBikeInfo(bm);
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
+	@RequestMapping("/editbike")
+	public String editPbsBikeInfo(Model model,String bm)throws Exception{
+		
+		PbsBikeInfo pbsBikeInfo = bikeService.findPbsBikeInfoByBikebm(bm);
+		model.addAttribute("pbsBikeInfo", pbsBikeInfo);
+		
+		return "/base/bike/editbike";
+	}
+	
+	@RequestMapping("/editbikesubmit")
+	public @ResponseBody SubmitResultInfo editPbsBikeInfoSubmit(PbsBikeInfoQueryVo pbsBikeInfoQueryVo)throws Exception{
+		
+		bikeService.updatePbsBikeInfo(pbsBikeInfoQueryVo.getPbsBikeInfoCustom());
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
 	}
 }
