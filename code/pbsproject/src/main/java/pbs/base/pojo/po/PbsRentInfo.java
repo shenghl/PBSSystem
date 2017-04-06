@@ -9,6 +9,8 @@ public class PbsRentInfo {
 
     private String rentName;
 
+    private String rentPosition;
+
     private Integer maxNumber;
 
     private Float lat;
@@ -24,8 +26,6 @@ public class PbsRentInfo {
     private Float topLimit;
 
     private Float lowLimit;
-
-    private String operNum;
 
     public Integer getId() {
         return id;
@@ -57,6 +57,14 @@ public class PbsRentInfo {
 
     public void setRentName(String rentName) {
         this.rentName = rentName == null ? null : rentName.trim();
+    }
+
+    public String getRentPosition() {
+        return rentPosition;
+    }
+
+    public void setRentPosition(String rentPosition) {
+        this.rentPosition = rentPosition == null ? null : rentPosition.trim();
     }
 
     public Integer getMaxNumber() {
@@ -121,13 +129,5 @@ public class PbsRentInfo {
 
     public void setLowLimit(Float lowLimit) {
         this.lowLimit = lowLimit;
-    }
-
-    public String getOperNum() {
-        return operNum;
-    }
-
-    public void setOperNum(String operNum) {
-        this.operNum = operNum == null ? null : operNum.trim();
     }
 }

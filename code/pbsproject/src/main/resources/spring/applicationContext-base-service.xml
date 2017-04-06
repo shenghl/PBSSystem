@@ -17,4 +17,6 @@
 <bean id="bikeService" class="pbs.base.service.impl.BikeServiceImpl"/>
 <!-- 用户管理 -->
 <bean id="userService" class="pbs.base.service.impl.UserServiceImpl"/>
+<!-- 站点管理 -->
+<bean id="rentService" class="pbs.base.service.impl.RentServiceImpl"/>
 </beans>

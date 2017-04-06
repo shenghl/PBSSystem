@@ -96,7 +96,7 @@ public class BikeServiceImpl implements BikeService {
 		pbsBikeInfo.setZd(pbsBikeInfoCustom.getZd());
 		pbsBikeInfo.setCz(pbsBikeInfoCustom.getCz());
 		
-//		BeanUtils.copyProperties(pbsBikeInfoCustom, pbsBikeInfo);
+		//BeanUtils.copyProperties(pbsBikeInfoCustom, pbsBikeInfo);
 		
 		pbsBikeInfoMapper.updateByPrimaryKey(pbsBikeInfo);
 		

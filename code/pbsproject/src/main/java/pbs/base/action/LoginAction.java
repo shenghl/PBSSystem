@@ -39,6 +39,12 @@ public class LoginAction {
 		
 		session.setAttribute(Config.ACTIVEUSER_KEY, activeUser);
 		
-		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 107, null));
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 107, new Object[] { "" }));
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session)throws Exception{
+		session.invalidate();
+		return "redirect:login.action";
 	}
 }

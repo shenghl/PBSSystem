@@ -6,6 +6,7 @@
     <result column="ZONE_NAME" property="zoneName" jdbcType="VARCHAR" />
     <result column="ROAD" property="road" jdbcType="VARCHAR" />
     <result column="RENT_NAME" property="rentName" jdbcType="VARCHAR" />
+    <result column="RENT_POSITION" property="rentPosition" jdbcType="VARCHAR" />
     <result column="MAX_NUMBER" property="maxNumber" jdbcType="INTEGER" />
     <result column="LAT" property="lat" jdbcType="REAL" />
     <result column="LNG" property="lng" jdbcType="REAL" />
@@ -14,7 +15,6 @@
     <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
     <result column="TOP_LIMIT" property="topLimit" jdbcType="REAL" />
     <result column="LOW_LIMIT" property="lowLimit" jdbcType="REAL" />
-    <result column="OPER_NUM" property="operNum" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, ZONE_NAME, ROAD, RENT_NAME, MAX_NUMBER, LAT, LNG, LEFT_OR_RIGHT, RENT_RANK, AREA_ID, 
-    TOP_LIMIT, LOW_LIMIT, OPER_NUM
+    ID, ZONE_NAME, ROAD, RENT_NAME, RENT_POSITION, MAX_NUMBER, LAT, LNG, LEFT_OR_RIGHT, 
+    RENT_RANK, AREA_ID, TOP_LIMIT, LOW_LIMIT
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pbs.base.pojo.po.PbsRentInfoExample" >
     select
@@ -110,15 +110,15 @@
   </delete>
   <insert id="insert" parameterType="pbs.base.pojo.po.PbsRentInfo" >
     insert into pbs_rent_info (ID, ZONE_NAME, ROAD, 
-      RENT_NAME, MAX_NUMBER, LAT, 
-      LNG, LEFT_OR_RIGHT, RENT_RANK, 
-      AREA_ID, TOP_LIMIT, LOW_LIMIT, 
-      OPER_NUM)
+      RENT_NAME, RENT_POSITION, MAX_NUMBER, 
+      LAT, LNG, LEFT_OR_RIGHT, RENT_RANK, 
+      AREA_ID, TOP_LIMIT, LOW_LIMIT
+      )
     values (#{id,jdbcType=INTEGER}, #{zoneName,jdbcType=VARCHAR}, #{road,jdbcType=VARCHAR}, 
-      #{rentName,jdbcType=VARCHAR}, #{maxNumber,jdbcType=INTEGER}, #{lat,jdbcType=REAL}, 
-      #{lng,jdbcType=REAL}, #{leftOrRight,jdbcType=VARCHAR}, #{rentRank,jdbcType=INTEGER}, 
-      #{areaId,jdbcType=INTEGER}, #{topLimit,jdbcType=REAL}, #{lowLimit,jdbcType=REAL}, 
-      #{operNum,jdbcType=VARCHAR})
+      #{rentName,jdbcType=VARCHAR}, #{rentPosition,jdbcType=VARCHAR}, #{maxNumber,jdbcType=INTEGER}, 
+      #{lat,jdbcType=REAL}, #{lng,jdbcType=REAL}, #{leftOrRight,jdbcType=VARCHAR}, #{rentRank,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{topLimit,jdbcType=REAL}, #{lowLimit,jdbcType=REAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="pbs.base.pojo.po.PbsRentInfo" >
     insert into pbs_rent_info
@@ -134,6 +134,9 @@
       </if>
       <if test="rentName != null" >
         RENT_NAME,
+      </if>
+      <if test="rentPosition != null" >
+        RENT_POSITION,
       </if>
       <if test="maxNumber != null" >
         MAX_NUMBER,
@@ -159,9 +162,6 @@
       <if test="lowLimit != null" >
         LOW_LIMIT,
       </if>
-      <if test="operNum != null" >
-        OPER_NUM,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -175,6 +175,9 @@
       </if>
       <if test="rentName != null" >
         #{rentName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentPosition != null" >
+        #{rentPosition,jdbcType=VARCHAR},
       </if>
       <if test="maxNumber != null" >
         #{maxNumber,jdbcType=INTEGER},
@@ -200,9 +203,6 @@
       <if test="lowLimit != null" >
         #{lowLimit,jdbcType=REAL},
       </if>
-      <if test="operNum != null" >
-        #{operNum,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="pbs.base.pojo.po.PbsRentInfoExample" resultType="java.lang.Integer" >
@@ -225,6 +225,9 @@
       </if>
       <if test="record.rentName != null" >
         RENT_NAME = #{record.rentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rentPosition != null" >
+        RENT_POSITION = #{record.rentPosition,jdbcType=VARCHAR},
       </if>
       <if test="record.maxNumber != null" >
         MAX_NUMBER = #{record.maxNumber,jdbcType=INTEGER},
@@ -250,9 +253,6 @@
       <if test="record.lowLimit != null" >
         LOW_LIMIT = #{record.lowLimit,jdbcType=REAL},
       </if>
-      <if test="record.operNum != null" >
-        OPER_NUM = #{record.operNum,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -264,6 +264,7 @@
       ZONE_NAME = #{record.zoneName,jdbcType=VARCHAR},
       ROAD = #{record.road,jdbcType=VARCHAR},
       RENT_NAME = #{record.rentName,jdbcType=VARCHAR},
+      RENT_POSITION = #{record.rentPosition,jdbcType=VARCHAR},
       MAX_NUMBER = #{record.maxNumber,jdbcType=INTEGER},
       LAT = #{record.lat,jdbcType=REAL},
       LNG = #{record.lng,jdbcType=REAL},
@@ -271,8 +272,7 @@
       RENT_RANK = #{record.rentRank,jdbcType=INTEGER},
       AREA_ID = #{record.areaId,jdbcType=INTEGER},
       TOP_LIMIT = #{record.topLimit,jdbcType=REAL},
-      LOW_LIMIT = #{record.lowLimit,jdbcType=REAL},
-      OPER_NUM = #{record.operNum,jdbcType=VARCHAR}
+      LOW_LIMIT = #{record.lowLimit,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -288,6 +288,9 @@
       </if>
       <if test="rentName != null" >
         RENT_NAME = #{rentName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentPosition != null" >
+        RENT_POSITION = #{rentPosition,jdbcType=VARCHAR},
       </if>
       <if test="maxNumber != null" >
         MAX_NUMBER = #{maxNumber,jdbcType=INTEGER},
@@ -313,9 +316,6 @@
       <if test="lowLimit != null" >
         LOW_LIMIT = #{lowLimit,jdbcType=REAL},
       </if>
-      <if test="operNum != null" >
-        OPER_NUM = #{operNum,jdbcType=VARCHAR},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -324,6 +324,7 @@
     set ZONE_NAME = #{zoneName,jdbcType=VARCHAR},
       ROAD = #{road,jdbcType=VARCHAR},
       RENT_NAME = #{rentName,jdbcType=VARCHAR},
+      RENT_POSITION = #{rentPosition,jdbcType=VARCHAR},
       MAX_NUMBER = #{maxNumber,jdbcType=INTEGER},
       LAT = #{lat,jdbcType=REAL},
       LNG = #{lng,jdbcType=REAL},
@@ -331,8 +332,7 @@
       RENT_RANK = #{rentRank,jdbcType=INTEGER},
       AREA_ID = #{areaId,jdbcType=INTEGER},
       TOP_LIMIT = #{topLimit,jdbcType=REAL},
-      LOW_LIMIT = #{lowLimit,jdbcType=REAL},
-      OPER_NUM = #{operNum,jdbcType=VARCHAR}
+      LOW_LIMIT = #{lowLimit,jdbcType=REAL}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

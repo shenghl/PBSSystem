@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pbs.base.dao.mapper.PbsRentInfoMapperCustom" >
+
+	<sql id="query_rent">
+		<if test="pbsRentInfoCustom!=null">
+			<if test="pbsRentInfoCustom.id!=null and pbsRentInfoCustom.id!=''">
+				and rent.id = #{pbsRentInfoCustom.id}
+			</if>
+			<if test="pbsRentInfoCustom.zoneName!=null and pbsRentInfoCustom.zoneName!=''">
+				and rent.zone_name = #{pbsRentInfoCustom.zoneName}
+			</if>
+			<if test="pbsRentInfoCustom.road!=null and pbsRentInfoCustom.road!=''">
+				and rent.road = #{pbsRentInfoCustom.road}
+			</if>
+			<if test="pbsRentInfoCustom.rentName!=null and pbsRentInfoCustom.rentName!=''">
+				and rent.rent_name = #{pbsRentInfoCustom.rentName}
+			</if>
+		</if>
+	</sql>
+
+	<select id="findPbsRentInfoList" parameterType="pbs.base.pojo.vo.PbsRentInfoQueryVo" 
+	resultType="pbs.base.pojo.vo.PbsRentInfoCustom">
+	SELECT 
+	  rent.ID,
+	  rent.ZONE_NAME zoneName,
+	  rent.ROAD,
+	  rent.RENT_NAME rentName,
+	  rent.RENT_POSITION rentPosition,
+	  rent.MAX_NUMBER maxNumber,
+	  rent.LAT lat,
+	  rent.LNG lng
+	FROM
+	  pbs_rent_info rent
+  <where>
+	<include refid="query_rent"></include>
+  </where>
+  limit ${pageQuery.start},${pageQuery.rows}
+	</select>
+	
+	<select id="findPbsRentInfoCount" parameterType="pbs.base.pojo.vo.PbsRentInfoQueryVo"
+	resultType="int">
+	SELECT count(*)
+	FROM
+	  pbs_rent_info rent
+	<where>
+		<include refid="query_rent"></include>
+	</where>
+	</select>
+
+</mapper>

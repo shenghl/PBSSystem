@@ -374,6 +374,76 @@ public class PbsRentInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andRentPositionIsNull() {
+            addCriterion("RENT_POSITION is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionIsNotNull() {
+            addCriterion("RENT_POSITION is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionEqualTo(String value) {
+            addCriterion("RENT_POSITION =", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionNotEqualTo(String value) {
+            addCriterion("RENT_POSITION <>", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionGreaterThan(String value) {
+            addCriterion("RENT_POSITION >", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionGreaterThanOrEqualTo(String value) {
+            addCriterion("RENT_POSITION >=", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionLessThan(String value) {
+            addCriterion("RENT_POSITION <", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionLessThanOrEqualTo(String value) {
+            addCriterion("RENT_POSITION <=", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionLike(String value) {
+            addCriterion("RENT_POSITION like", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionNotLike(String value) {
+            addCriterion("RENT_POSITION not like", value, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionIn(List<String> values) {
+            addCriterion("RENT_POSITION in", values, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionNotIn(List<String> values) {
+            addCriterion("RENT_POSITION not in", values, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionBetween(String value1, String value2) {
+            addCriterion("RENT_POSITION between", value1, value2, "rentPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andRentPositionNotBetween(String value1, String value2) {
+            addCriterion("RENT_POSITION not between", value1, value2, "rentPosition");
+            return (Criteria) this;
+        }
+
         public Criteria andMaxNumberIsNull() {
             addCriterion("MAX_NUMBER is null");
             return (Criteria) this;
@@ -861,76 +931,6 @@ public class PbsRentInfoExample {
 
         public Criteria andLowLimitNotBetween(Float value1, Float value2) {
             addCriterion("LOW_LIMIT not between", value1, value2, "lowLimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumIsNull() {
-            addCriterion("OPER_NUM is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumIsNotNull() {
-            addCriterion("OPER_NUM is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumEqualTo(String value) {
-            addCriterion("OPER_NUM =", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumNotEqualTo(String value) {
-            addCriterion("OPER_NUM <>", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumGreaterThan(String value) {
-            addCriterion("OPER_NUM >", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumGreaterThanOrEqualTo(String value) {
-            addCriterion("OPER_NUM >=", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumLessThan(String value) {
-            addCriterion("OPER_NUM <", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumLessThanOrEqualTo(String value) {
-            addCriterion("OPER_NUM <=", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumLike(String value) {
-            addCriterion("OPER_NUM like", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumNotLike(String value) {
-            addCriterion("OPER_NUM not like", value, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumIn(List<String> values) {
-            addCriterion("OPER_NUM in", values, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumNotIn(List<String> values) {
-            addCriterion("OPER_NUM not in", values, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumBetween(String value1, String value2) {
-            addCriterion("OPER_NUM between", value1, value2, "operNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperNumNotBetween(String value1, String value2) {
-            addCriterion("OPER_NUM not between", value1, value2, "operNum");
             return (Criteria) this;
         }
     }
