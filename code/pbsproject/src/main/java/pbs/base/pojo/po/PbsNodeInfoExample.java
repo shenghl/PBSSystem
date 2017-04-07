@@ -164,6 +164,66 @@ public class PbsNodeInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andZhIsNull() {
+            addCriterion("ZH is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhIsNotNull() {
+            addCriterion("ZH is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhEqualTo(Integer value) {
+            addCriterion("ZH =", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhNotEqualTo(Integer value) {
+            addCriterion("ZH <>", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhGreaterThan(Integer value) {
+            addCriterion("ZH >", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ZH >=", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhLessThan(Integer value) {
+            addCriterion("ZH <", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhLessThanOrEqualTo(Integer value) {
+            addCriterion("ZH <=", value, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhIn(List<Integer> values) {
+            addCriterion("ZH in", values, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhNotIn(List<Integer> values) {
+            addCriterion("ZH not in", values, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhBetween(Integer value1, Integer value2) {
+            addCriterion("ZH between", value1, value2, "zh");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhNotBetween(Integer value1, Integer value2) {
+            addCriterion("ZH not between", value1, value2, "zh");
+            return (Criteria) this;
+        }
+
         public Criteria andZtIsNull() {
             addCriterion("ZT is null");
             return (Criteria) this;

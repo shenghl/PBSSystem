@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pbs.base.dao.mapper.PbsNodeInfoMapperCustom" >
+
+	<sql id="query_node">
+		<if test="pbsNodeInfoCustom!=null">
+			<if test="pbsNodeInfoCustom.zh!=null and pbsNodeInfoCustom.zh!=''">
+				and Node.zh = #{pbsNodeInfoCustom.zh}
+			</if>
+			<if test="pbsNodeInfoCustom.zt!=null and pbsNodeInfoCustom.zt!=''">
+				and Node.zt = #{pbsNodeInfoCustom.zt}
+			</if>
+			<if test="pbsNodeInfoCustom.bm!=null and pbsNodeInfoCustom.bm!=''">
+				and Node.bm = #{pbsNodeInfoCustom.bm}
+			</if>
+			<if test="pbsNodeInfoCustom.zd!=null and pbsNodeInfoCustom.zd!=''">
+				and Node.zd = #{pbsNodeInfoCustom.zd}
+			</if>
+		</if>
+	</sql>
+
+	<select id="findPbsNodeInfoList" parameterType="pbs.base.pojo.vo.PbsNodeInfoQueryVo" 
+	resultType="pbs.base.pojo.vo.PbsNodeInfoCustom">
+	SELECT 
+	  Node.ID,
+	  Node.ZH,
+	  Node.ZT,
+	  Node.BM,
+	  Node.ZD
+	FROM
+	  pbs_Node_info Node
+  <where>
+	<include refid="query_node"></include>
+  </where>
+  limit ${pageQuery.start},${pageQuery.rows}
+	</select>
+	
+	<select id="findPbsNodeInfoCount" parameterType="pbs.base.pojo.vo.PbsNodeInfoQueryVo"
+	resultType="int">
+	SELECT count(*)
+	FROM
+	  pbs_Node_info Node
+	<where>
+		<include refid="query_node"></include>
+	</where>
+	</select>
+
+</mapper>

@@ -3,6 +3,7 @@
 <mapper namespace="pbs.base.dao.mapper.PbsNodeInfoMapper" >
   <resultMap id="BaseResultMap" type="pbs.base.pojo.po.PbsNodeInfo" >
     <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ZH" property="zh" jdbcType="INTEGER" />
     <result column="ZT" property="zt" jdbcType="VARCHAR" />
     <result column="BM" property="bm" jdbcType="VARCHAR" />
     <result column="ZD" property="zd" jdbcType="INTEGER" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, ZT, BM, ZD
+    ID, ZH, ZT, BM, ZD
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pbs.base.pojo.po.PbsNodeInfoExample" >
     select
@@ -99,16 +100,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="pbs.base.pojo.po.PbsNodeInfo" >
-    insert into pbs_node_info (ID, ZT, BM, ZD
-      )
-    values (#{id,jdbcType=INTEGER}, #{zt,jdbcType=VARCHAR}, #{bm,jdbcType=VARCHAR}, #{zd,jdbcType=INTEGER}
-      )
+    insert into pbs_node_info (ID, ZH, ZT, BM, 
+      ZD)
+    values (#{id,jdbcType=INTEGER}, #{zh,jdbcType=INTEGER}, #{zt,jdbcType=VARCHAR}, #{bm,jdbcType=VARCHAR}, 
+      #{zd,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="pbs.base.pojo.po.PbsNodeInfo" >
     insert into pbs_node_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
+      </if>
+      <if test="zh != null" >
+        ZH,
       </if>
       <if test="zt != null" >
         ZT,
@@ -123,6 +127,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="zh != null" >
+        #{zh,jdbcType=INTEGER},
       </if>
       <if test="zt != null" >
         #{zt,jdbcType=VARCHAR},
@@ -147,6 +154,9 @@
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.zh != null" >
+        ZH = #{record.zh,jdbcType=INTEGER},
+      </if>
       <if test="record.zt != null" >
         ZT = #{record.zt,jdbcType=VARCHAR},
       </if>
@@ -164,6 +174,7 @@
   <update id="updateByExample" parameterType="map" >
     update pbs_node_info
     set ID = #{record.id,jdbcType=INTEGER},
+      ZH = #{record.zh,jdbcType=INTEGER},
       ZT = #{record.zt,jdbcType=VARCHAR},
       BM = #{record.bm,jdbcType=VARCHAR},
       ZD = #{record.zd,jdbcType=INTEGER}
@@ -174,6 +185,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="pbs.base.pojo.po.PbsNodeInfo" >
     update pbs_node_info
     <set >
+      <if test="zh != null" >
+        ZH = #{zh,jdbcType=INTEGER},
+      </if>
       <if test="zt != null" >
         ZT = #{zt,jdbcType=VARCHAR},
       </if>
@@ -188,7 +202,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pbs.base.pojo.po.PbsNodeInfo" >
     update pbs_node_info
-    set ZT = #{zt,jdbcType=VARCHAR},
+    set ZH = #{zh,jdbcType=INTEGER},
+      ZT = #{zt,jdbcType=VARCHAR},
       BM = #{bm,jdbcType=VARCHAR},
       ZD = #{zd,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}

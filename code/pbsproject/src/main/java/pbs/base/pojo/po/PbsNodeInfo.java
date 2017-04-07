@@ -3,6 +3,8 @@ package pbs.base.pojo.po;
 public class PbsNodeInfo {
     private Integer id;
 
+    private Integer zh;
+
     private String zt;
 
     private String bm;
@@ -15,6 +17,14 @@ public class PbsNodeInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getZh() {
+        return zh;
+    }
+
+    public void setZh(Integer zh) {
+        this.zh = zh;
     }
 
     public String getZt() {
