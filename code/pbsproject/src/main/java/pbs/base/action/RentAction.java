@@ -8,10 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pbs.base.dao.mapper.PbsRentInfoMapper;
+import pbs.base.pojo.po.PbsRentInfo;
 import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
+import pbs.base.process.context.Config;
 import pbs.base.process.result.DataGridResultInfo;
+import pbs.base.process.result.ResultUtil;
+import pbs.base.process.result.SubmitResultInfo;
 import pbs.base.service.RentService;
 
 @Controller
@@ -20,6 +25,9 @@ public class RentAction {
 
 	@Autowired
 	private RentService rentService;
+	
+	@Autowired
+	private PbsRentInfoMapper pbsRentInfoMapper;
 	
 	@RequestMapping("/queryrent")
 	public String queryRent(Model model)throws Exception{
@@ -44,4 +52,40 @@ public class RentAction {
 		dataGridResultInfo.setRows(list);
 		return dataGridResultInfo;
 	}
+	
+	//添加站点页面
+	@RequestMapping("/addrent")
+	public String addRent()throws Exception{
+		return "/base/rent/addrent";
+	}
+	
+	//添加站点提交
+	@RequestMapping("/addrentsubmit")
+	public @ResponseBody SubmitResultInfo addRentSumbit(PbsRentInfoQueryVo pbsRentInfoQueryVo)throws Exception{
+		rentService.insertPbsRentInfo(pbsRentInfoQueryVo.getPbsRentInfoCustom());
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
+	//站点删除
+	@RequestMapping("/deleterent")
+	public @ResponseBody SubmitResultInfo deletePbsRentInfo(Integer id) throws Exception{
+		rentService.deletPbsRentInfo(id);
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
+	@RequestMapping("/editrent")
+	public String editPbsRentInfo(Model model,Integer id)throws Exception{
+		
+		PbsRentInfo pbsRentInfo = pbsRentInfoMapper.selectByPrimaryKey(id);
+		model.addAttribute("pbsRentInfo", pbsRentInfo);
+		
+		return "/base/rent/editrent";
+	}
+	
+	@RequestMapping("/editrentsubmit")
+	public @ResponseBody SubmitResultInfo editPbsRentInfoSubmit(PbsRentInfoQueryVo pbsRentInfoQueryVo)throws Exception{
+		rentService.updatePbsRentInfo(pbsRentInfoQueryVo.getPbsRentInfoCustom());
+		return ResultUtil.createSubmitResult(ResultUtil.createSuccess(Config.MESSAGE, 906, null));
+	}
+	
 }

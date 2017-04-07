@@ -26,7 +26,6 @@ public class BikeAction {
 	@Autowired
 	private BikeService bikeService;
 	
-	int start = 0;
 
 	@RequestMapping("/querybike")
 	public String queryBike(Model model)throws Exception{
