@@ -1,5 +1,7 @@
 package pbs.base.process.context;
 
+import java.util.Properties;
+
 
 /**
  * 系统参数配置类，配置了系统用到参数
@@ -7,8 +9,22 @@ package pbs.base.process.context;
  * 
  */
 public class Config {
+	
+	/**
+	 * 存储空间
+	 */
+	public static Properties properties = new Properties();
 
-
+	/**
+	 * 微信接口url
+	 */
+	public static final String INTERFACE_URL = "interface_url";
+	
+	/**
+	 * 微信路径
+	 */
+	public static final String WECHAT = "wechat";
+	
 	/**
 	 * 系统语言环境，默认为中文zh
 	 */

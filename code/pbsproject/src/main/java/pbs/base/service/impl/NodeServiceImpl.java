@@ -59,7 +59,7 @@ public class NodeServiceImpl implements NodeService{
 	public void deletPbsNodeInfo(Integer id) throws Exception{
 		PbsNodeInfo pbsNodeInfo = pbsNodeInfoMapper.selectByPrimaryKey(id);
 		if(pbsNodeInfo==null){
-			ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 131, null));
+			ResultUtil.throwExcepion(ResultUtil.createFail(Config.MESSAGE, 133, null));
 		}
 		pbsNodeInfoMapper.deleteByPrimaryKey(id);
 	}

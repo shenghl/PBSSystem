@@ -33,6 +33,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler) throws Exception {
+		String url = request.getRequestURI();
+		if(url.indexOf(Config.WECHAT)>=0){
+			return true;
+		}
+		
 		HttpSession session = request.getSession();
 		ActiveUser activeUser = (ActiveUser) session.getAttribute(Config.ACTIVEUSER_KEY);
 		if(activeUser != null){
@@ -41,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		List<String> open_urls = ResourcesUtil.gekeyList(Config.ANONYMOUS_ACTIONS);
 		
-		String url = request.getRequestURI();
+		//System.out.println(url);
 		for(String open_url:open_urls){
 			if(url.indexOf(open_url)>=0){
 				return true;
