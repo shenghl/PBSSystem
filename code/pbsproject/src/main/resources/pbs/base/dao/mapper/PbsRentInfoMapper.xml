@@ -8,8 +8,8 @@
     <result column="RENT_NAME" property="rentName" jdbcType="VARCHAR" />
     <result column="RENT_POSITION" property="rentPosition" jdbcType="VARCHAR" />
     <result column="MAX_NUMBER" property="maxNumber" jdbcType="INTEGER" />
-    <result column="LAT" property="lat" jdbcType="REAL" />
-    <result column="LNG" property="lng" jdbcType="REAL" />
+    <result column="LAT" property="lat" jdbcType="DOUBLE" />
+    <result column="LNG" property="lng" jdbcType="DOUBLE" />
     <result column="LEFT_OR_RIGHT" property="leftOrRight" jdbcType="VARCHAR" />
     <result column="RENT_RANK" property="rentRank" jdbcType="INTEGER" />
     <result column="AREA_ID" property="areaId" jdbcType="INTEGER" />
@@ -111,14 +111,14 @@
   <insert id="insert" parameterType="pbs.base.pojo.po.PbsRentInfo" >
     insert into pbs_rent_info (ID, ZONE_NAME, ROAD, 
       RENT_NAME, RENT_POSITION, MAX_NUMBER, 
-      LAT, LNG, LEFT_OR_RIGHT, RENT_RANK, 
-      AREA_ID, TOP_LIMIT, LOW_LIMIT
-      )
+      LAT, LNG, LEFT_OR_RIGHT, 
+      RENT_RANK, AREA_ID, TOP_LIMIT, 
+      LOW_LIMIT)
     values (#{id,jdbcType=INTEGER}, #{zoneName,jdbcType=VARCHAR}, #{road,jdbcType=VARCHAR}, 
       #{rentName,jdbcType=VARCHAR}, #{rentPosition,jdbcType=VARCHAR}, #{maxNumber,jdbcType=INTEGER}, 
-      #{lat,jdbcType=REAL}, #{lng,jdbcType=REAL}, #{leftOrRight,jdbcType=VARCHAR}, #{rentRank,jdbcType=INTEGER}, 
-      #{areaId,jdbcType=INTEGER}, #{topLimit,jdbcType=REAL}, #{lowLimit,jdbcType=REAL}
-      )
+      #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{leftOrRight,jdbcType=VARCHAR}, 
+      #{rentRank,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{topLimit,jdbcType=REAL}, 
+      #{lowLimit,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="pbs.base.pojo.po.PbsRentInfo" >
     insert into pbs_rent_info
@@ -183,10 +183,10 @@
         #{maxNumber,jdbcType=INTEGER},
       </if>
       <if test="lat != null" >
-        #{lat,jdbcType=REAL},
+        #{lat,jdbcType=DOUBLE},
       </if>
       <if test="lng != null" >
-        #{lng,jdbcType=REAL},
+        #{lng,jdbcType=DOUBLE},
       </if>
       <if test="leftOrRight != null" >
         #{leftOrRight,jdbcType=VARCHAR},
@@ -233,10 +233,10 @@
         MAX_NUMBER = #{record.maxNumber,jdbcType=INTEGER},
       </if>
       <if test="record.lat != null" >
-        LAT = #{record.lat,jdbcType=REAL},
+        LAT = #{record.lat,jdbcType=DOUBLE},
       </if>
       <if test="record.lng != null" >
-        LNG = #{record.lng,jdbcType=REAL},
+        LNG = #{record.lng,jdbcType=DOUBLE},
       </if>
       <if test="record.leftOrRight != null" >
         LEFT_OR_RIGHT = #{record.leftOrRight,jdbcType=VARCHAR},
@@ -266,8 +266,8 @@
       RENT_NAME = #{record.rentName,jdbcType=VARCHAR},
       RENT_POSITION = #{record.rentPosition,jdbcType=VARCHAR},
       MAX_NUMBER = #{record.maxNumber,jdbcType=INTEGER},
-      LAT = #{record.lat,jdbcType=REAL},
-      LNG = #{record.lng,jdbcType=REAL},
+      LAT = #{record.lat,jdbcType=DOUBLE},
+      LNG = #{record.lng,jdbcType=DOUBLE},
       LEFT_OR_RIGHT = #{record.leftOrRight,jdbcType=VARCHAR},
       RENT_RANK = #{record.rentRank,jdbcType=INTEGER},
       AREA_ID = #{record.areaId,jdbcType=INTEGER},
@@ -296,10 +296,10 @@
         MAX_NUMBER = #{maxNumber,jdbcType=INTEGER},
       </if>
       <if test="lat != null" >
-        LAT = #{lat,jdbcType=REAL},
+        LAT = #{lat,jdbcType=DOUBLE},
       </if>
       <if test="lng != null" >
-        LNG = #{lng,jdbcType=REAL},
+        LNG = #{lng,jdbcType=DOUBLE},
       </if>
       <if test="leftOrRight != null" >
         LEFT_OR_RIGHT = #{leftOrRight,jdbcType=VARCHAR},
@@ -326,8 +326,8 @@
       RENT_NAME = #{rentName,jdbcType=VARCHAR},
       RENT_POSITION = #{rentPosition,jdbcType=VARCHAR},
       MAX_NUMBER = #{maxNumber,jdbcType=INTEGER},
-      LAT = #{lat,jdbcType=REAL},
-      LNG = #{lng,jdbcType=REAL},
+      LAT = #{lat,jdbcType=DOUBLE},
+      LNG = #{lng,jdbcType=DOUBLE},
       LEFT_OR_RIGHT = #{leftOrRight,jdbcType=VARCHAR},
       RENT_RANK = #{rentRank,jdbcType=INTEGER},
       AREA_ID = #{areaId,jdbcType=INTEGER},

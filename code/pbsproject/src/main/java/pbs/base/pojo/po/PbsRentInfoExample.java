@@ -514,52 +514,52 @@ public class PbsRentInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLatEqualTo(Float value) {
+        public Criteria andLatEqualTo(Double value) {
             addCriterion("LAT =", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatNotEqualTo(Float value) {
+        public Criteria andLatNotEqualTo(Double value) {
             addCriterion("LAT <>", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatGreaterThan(Float value) {
+        public Criteria andLatGreaterThan(Double value) {
             addCriterion("LAT >", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatGreaterThanOrEqualTo(Float value) {
+        public Criteria andLatGreaterThanOrEqualTo(Double value) {
             addCriterion("LAT >=", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatLessThan(Float value) {
+        public Criteria andLatLessThan(Double value) {
             addCriterion("LAT <", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatLessThanOrEqualTo(Float value) {
+        public Criteria andLatLessThanOrEqualTo(Double value) {
             addCriterion("LAT <=", value, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatIn(List<Float> values) {
+        public Criteria andLatIn(List<Double> values) {
             addCriterion("LAT in", values, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatNotIn(List<Float> values) {
+        public Criteria andLatNotIn(List<Double> values) {
             addCriterion("LAT not in", values, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatBetween(Float value1, Float value2) {
+        public Criteria andLatBetween(Double value1, Double value2) {
             addCriterion("LAT between", value1, value2, "lat");
             return (Criteria) this;
         }
 
-        public Criteria andLatNotBetween(Float value1, Float value2) {
+        public Criteria andLatNotBetween(Double value1, Double value2) {
             addCriterion("LAT not between", value1, value2, "lat");
             return (Criteria) this;
         }
@@ -574,52 +574,52 @@ public class PbsRentInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLngEqualTo(Float value) {
+        public Criteria andLngEqualTo(Double value) {
             addCriterion("LNG =", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngNotEqualTo(Float value) {
+        public Criteria andLngNotEqualTo(Double value) {
             addCriterion("LNG <>", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngGreaterThan(Float value) {
+        public Criteria andLngGreaterThan(Double value) {
             addCriterion("LNG >", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngGreaterThanOrEqualTo(Float value) {
+        public Criteria andLngGreaterThanOrEqualTo(Double value) {
             addCriterion("LNG >=", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngLessThan(Float value) {
+        public Criteria andLngLessThan(Double value) {
             addCriterion("LNG <", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngLessThanOrEqualTo(Float value) {
+        public Criteria andLngLessThanOrEqualTo(Double value) {
             addCriterion("LNG <=", value, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngIn(List<Float> values) {
+        public Criteria andLngIn(List<Double> values) {
             addCriterion("LNG in", values, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngNotIn(List<Float> values) {
+        public Criteria andLngNotIn(List<Double> values) {
             addCriterion("LNG not in", values, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngBetween(Float value1, Float value2) {
+        public Criteria andLngBetween(Double value1, Double value2) {
             addCriterion("LNG between", value1, value2, "lng");
             return (Criteria) this;
         }
 
-        public Criteria andLngNotBetween(Float value1, Float value2) {
+        public Criteria andLngNotBetween(Double value1, Double value2) {
             addCriterion("LNG not between", value1, value2, "lng");
             return (Criteria) this;
         }

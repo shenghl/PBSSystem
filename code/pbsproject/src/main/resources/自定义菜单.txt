@@ -1,0 +1,20 @@
+{
+        "button": [
+            {
+                "type": "view", 
+                "name": "点我用车", 
+                "url": "https://www.baidu.com", 
+                "sub_button": [ ]
+            }, {
+                "type": "view", 
+                "name": "下载APP", 
+                "url": "https://www.baidu.com", 
+                "sub_button": [ ]
+            }, {
+                "type": "view", 
+                "name": "用户服务", 
+                "url": "https://www.baidu.com", 
+                "sub_button": [ ]
+            }
+        ]
+}
