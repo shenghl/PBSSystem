@@ -13,5 +13,11 @@ public class test {
 		String a = ResourcesUtil.getValue("wechat", "appid");
 		System.out.println(a);
 	}
+	
+	@Test
+	public void testTime(){
+		String timestamp = Long.toString(System.currentTimeMillis()/1000);
+		System.out.println(timestamp);
+	}
 
 }

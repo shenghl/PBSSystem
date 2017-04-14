@@ -1,13 +1,16 @@
 package pbs.business.action;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +22,15 @@ import pbs.wechat.util.WechatSignUtil;
 
 @Controller
 @RequestMapping("/wechat")
-public class WechatSecurityAction {
+public class WechatAction {
 	
 	private static Logger logger = Logger.getLogger(WechatSignUtil.class);
+	
+	@RequestMapping("/jssdkconfig")
+	public String jssdk(){
+		return "/base/wechat/yongche";
+	}
+	
 
 	@RequestMapping(value="/security",method= RequestMethod.GET)
 	public void doGet(
@@ -64,4 +73,15 @@ public class WechatSecurityAction {
             logger.error(e,e);
         }
 	}
+	
+	@RequestMapping("/riding")
+	public String riding(Model model,
+			@RequestParam(value="rent",required=true) String rent,
+			@RequestParam(value="node",required=true) String node){
+		model.addAttribute("rent", rent);
+		model.addAttribute("node", node);
+		return "/base/wechat/riding";
+	}
+	
+	
 }

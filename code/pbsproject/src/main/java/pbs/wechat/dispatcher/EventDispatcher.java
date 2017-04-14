@@ -1,14 +1,9 @@
 package pbs.wechat.dispatcher;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import pbs.wechat.message.resp.Article;
 import pbs.wechat.message.resp.NewsMessage;
-import pbs.wechat.util.GetUseInfo;
 import pbs.wechat.util.MessageUtil;
 
 /**

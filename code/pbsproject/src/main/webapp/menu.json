@@ -10,7 +10,7 @@
                  }] 
                },
                {"icon" : "icon-sys","menuid" : "1","menuname" : "业务管理","url" : "","menus" : [
-                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "地图管理","url" : "/pbsproject/querymap.action"
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "地图管理","url" : "/pbsproject/map/querymap.action"
                  },
                  {"icon" : "icon-log","menuid" : "1_1","menuname" : "订单管理","url" : "/pbsproject/rent/queryorder.action"
                  }] 
