@@ -1,20 +1,26 @@
 package pbs.business.action;
 
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import pbs.base.pojo.vo.PageQuery;
+import pbs.base.pojo.vo.PbsRentInfoCustom;
+import pbs.base.pojo.vo.PbsRentInfoQueryVo;
+import pbs.base.process.result.DataGridResultInfo;
+import pbs.base.service.MapService;
 import pbs.wechat.dispatcher.EventDispatcher;
 import pbs.wechat.dispatcher.MsgDispatcher;
 import pbs.wechat.util.MessageUtil;
@@ -23,6 +29,9 @@ import pbs.wechat.util.WechatSignUtil;
 @Controller
 @RequestMapping("/wechat")
 public class WechatAction {
+	
+	@Autowired
+	private MapService mapService;
 	
 	private static Logger logger = Logger.getLogger(WechatSignUtil.class);
 	
@@ -81,6 +90,39 @@ public class WechatAction {
 		model.addAttribute("rent", rent);
 		model.addAttribute("node", node);
 		return "/base/wechat/riding";
+	}
+	
+	@RequestMapping("/querymap_result")
+	public @ResponseBody DataGridResultInfo queryMap_result(
+			PbsRentInfoQueryVo pbsRentInfoQueryVo
+			)throws Exception{
+
+		//非空校验
+		pbsRentInfoQueryVo = pbsRentInfoQueryVo!=null?pbsRentInfoQueryVo:new PbsRentInfoQueryVo();
+		
+		//获取查询记录总条数
+		int total = mapService.findPbsRentInfoCount(pbsRentInfoQueryVo);
+		
+		PageQuery pageQuery = new PageQuery();
+		pageQuery.setStart(0);
+		pageQuery.setRows(total);
+		pbsRentInfoQueryVo.setPageQuery(pageQuery);
+		
+		//获取站点信息list
+		List<PbsRentInfoCustom> list = mapService.findPbsRentInfoList(pbsRentInfoQueryVo);
+		
+		//新建DataGridResultInfo数据存储查询信息
+		DataGridResultInfo dataGridResultInfo = new DataGridResultInfo();
+		
+		//设置总条数进入dataGridResultInfo
+		dataGridResultInfo.setTotal(list.size());
+		
+		//设置结果集进入Row
+		dataGridResultInfo.setRows(list);
+		
+		//System.out.println(dataGridResultInfo.getTotal());
+		//返回
+		return dataGridResultInfo;
 	}
 	
 	

@@ -15,5 +15,7 @@ public interface MapService {
 	
 	public PbsRentInfo findPbsRentInfoById(int id) throws Exception;
 
-	
+	//查询转换后的list集合
+	public List<PbsRentInfoCustom> findConvertRentList(PbsRentInfoQueryVo pbsRentInfoQueryVo) 
+			throws Exception;
 }

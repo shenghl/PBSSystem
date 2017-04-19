@@ -29,7 +29,9 @@
 	  rent.RENT_POSITION rentPosition,
 	  rent.MAX_NUMBER maxNumber,
 	  rent.LAT lat,
-	  rent.LNG lng
+	  rent.LNG lng,
+	  rent.C_LAT cLat,
+	  rent.C_LNG cLng
 	FROM
 	  pbs_rent_info rent
   <where>

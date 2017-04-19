@@ -933,6 +933,126 @@ public class PbsRentInfoExample {
             addCriterion("LOW_LIMIT not between", value1, value2, "lowLimit");
             return (Criteria) this;
         }
+
+        public Criteria andCLatIsNull() {
+            addCriterion("C_LAT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatIsNotNull() {
+            addCriterion("C_LAT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatEqualTo(Double value) {
+            addCriterion("C_LAT =", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatNotEqualTo(Double value) {
+            addCriterion("C_LAT <>", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatGreaterThan(Double value) {
+            addCriterion("C_LAT >", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatGreaterThanOrEqualTo(Double value) {
+            addCriterion("C_LAT >=", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatLessThan(Double value) {
+            addCriterion("C_LAT <", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatLessThanOrEqualTo(Double value) {
+            addCriterion("C_LAT <=", value, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatIn(List<Double> values) {
+            addCriterion("C_LAT in", values, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatNotIn(List<Double> values) {
+            addCriterion("C_LAT not in", values, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatBetween(Double value1, Double value2) {
+            addCriterion("C_LAT between", value1, value2, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLatNotBetween(Double value1, Double value2) {
+            addCriterion("C_LAT not between", value1, value2, "cLat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngIsNull() {
+            addCriterion("C_LNG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngIsNotNull() {
+            addCriterion("C_LNG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngEqualTo(Double value) {
+            addCriterion("C_LNG =", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngNotEqualTo(Double value) {
+            addCriterion("C_LNG <>", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngGreaterThan(Double value) {
+            addCriterion("C_LNG >", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngGreaterThanOrEqualTo(Double value) {
+            addCriterion("C_LNG >=", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngLessThan(Double value) {
+            addCriterion("C_LNG <", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngLessThanOrEqualTo(Double value) {
+            addCriterion("C_LNG <=", value, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngIn(List<Double> values) {
+            addCriterion("C_LNG in", values, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngNotIn(List<Double> values) {
+            addCriterion("C_LNG not in", values, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngBetween(Double value1, Double value2) {
+            addCriterion("C_LNG between", value1, value2, "cLng");
+            return (Criteria) this;
+        }
+
+        public Criteria andCLngNotBetween(Double value1, Double value2) {
+            addCriterion("C_LNG not between", value1, value2, "cLng");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

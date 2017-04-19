@@ -27,6 +27,10 @@ public class PbsRentInfo {
 
     private Float lowLimit;
 
+    private Double cLat;
+
+    private Double cLng;
+
     public Integer getId() {
         return id;
     }
@@ -129,5 +133,21 @@ public class PbsRentInfo {
 
     public void setLowLimit(Float lowLimit) {
         this.lowLimit = lowLimit;
+    }
+
+    public Double getcLat() {
+        return cLat;
+    }
+
+    public void setcLat(Double cLat) {
+        this.cLat = cLat;
+    }
+
+    public Double getcLng() {
+        return cLng;
+    }
+
+    public void setcLng(Double cLng) {
+        this.cLng = cLng;
     }
 }

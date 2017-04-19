@@ -87,31 +87,68 @@ var longitude;
 	});
 	
 		wx.ready(function(){
+			
+			var map = new AMap.Map('container',{
+	            resizeEnable: true,
+	            zoom: 16,
+	            //center: [longitude, latitude]
+	        });
+			
+			AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Geolocation'],function(){
+		        var toolBar = new AMap.ToolBar();
+		        var scale = new AMap.Scale();
+		        var geolocation = new AMap.Geolocation();
+		        map.addControl(toolBar);
+		        map.addControl(scale);
+		        map.addControl(geolocation);
+		    });
+			
 			wx.getLocation({
 			      success: function (res) {
 			        
 			        latitude=res.latitude;
 			        longitude=res.longitude;
-					var map = new AMap.Map('container',{
-			            resizeEnable: true,
-			            zoom: 16,
-			            center: [longitude, latitude]
-			        });
 					
-				    AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Geolocation'],function(){
-				        var toolBar = new AMap.ToolBar();
-				        var scale = new AMap.Scale();
-				        var geolocation = new AMap.Geolocation();
-				        map.addControl(toolBar);
-				        map.addControl(scale);
-				        map.addControl(geolocation);
-				    });
+			        map.setCenter([longitude,latitude]);
 					
+				    loadData();
+				    
 			      },
 			      cancel: function (res) {
 			        alert('用户拒绝授权获取地理位置');
 			      }
 			  });
+			
+			function loadData(){
+				$.ajax({
+					   url : "${baseurl}querymap_result.action",
+					   type : "post",
+					   dataType : "json",
+					   success : function(data){
+						   //测试总条数   2360  测试通过
+						   console.log("记录总数=="+data.total);
+						   console.log("rentnamelist=="+data.rows[0].id);
+						   //循环输出点位标记
+						  for(var i = 0;i<data.total;i++){
+							  var icon = new AMap.Icon({
+			    					image: '../images/bike/blue.png',
+			    					size: new AMap.Size(36, 36)
+			    				});
+			    				marker = new AMap.Marker({
+			    					icon: icon,
+			    					position: [data.rows[i].lng,data.rows[i].lat],
+			    					offset: new AMap.Pixel(-12,-12),
+			    					title: data.rows[i].id+":"+data.rows[i].rentName+":"+data.rows[i].lng+","+data.rows[i].lat,
+			    					map: map
+			    				});
+						  }
+					   },
+					   error : function(){
+						   alert("加载站点失败");
+					   },
+				   }); 
+			}
+			
 		});
 	
 

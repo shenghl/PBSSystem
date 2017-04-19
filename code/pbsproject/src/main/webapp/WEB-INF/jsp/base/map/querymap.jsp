@@ -50,10 +50,13 @@
 	    					image: '../images/bike/blue.png',
 	    					size: new AMap.Size(36, 36)
 	    				});
+					  var lng = data.rows[i].cLng;
+					  var lat = data.rows[i].cLat;
+					  
 	    				marker = new AMap.Marker({
 	    					icon: icon,
-	    					position: [data.rows[i].lng,data.rows[i].lat],
-	    					offset: new AMap.Pixel(-12,-12),
+	    					position: [lng,lat],
+	    					offset: new AMap.Pixel(-10,10),
 	    					title: data.rows[i].id+":"+data.rows[i].rentName+":"+data.rows[i].lng+","+data.rows[i].lat,
 	    					map: map
 	    				});
