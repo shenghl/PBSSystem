@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pbs.base.dao.mapper.PbsRentInfoMapperCustom" >
+
+	<sql id="query_order">
+		<if test="pbsOrderInfoCustom!=null">
+			<if test="pbsOrderInfoCustom.id!=null and pbsOrderInfoCustom.id!=''">
+				and rent.id = #{pbsRentInfoCustom.id}
+			</if>
+			<if test="pbsOrderInfoCustom.zoneName!=null and pbsOrderInfoCustom.zoneName!=''">
+				and rent.zone_name = #{pbsRentInfoCustom.zoneName}
+			</if>
+			<if test="pbsOrderInfoCustom.road!=null and pbsOrderInfoCustom.road!=''">
+				and rent.road = #{pbsRentInfoCustom.road}
+			</if>
+			<if test="pbsOrderInfoCustom.rentName!=null and pbsOrderInfoCustom.rentName!=''">
+				and rent.rent_name = #{pbsRentInfoCustom.rentName}
+			</if>
+		</if>
+	</sql>
+
+	<select id="findPbsRentInfoList" parameterType="pbs.base.pojo.vo.PbsOrderInfoQueryVo" 
+	resultType="pbs.base.pojo.vo.PbsOrderInfoCustom">
+	SELECT 
+	  order.ID,
+	  order.rent_start rentStart,
+	  order.node_start nodeStart,
+	  order.rent_end rentEnd,
+	  order.node_end nodeEnd,
+	  order.time_start timeStart,
+	  order.time_end timeEnd,
+	  order.comment
+	FROM
+	  pbs_order_info order
+  <where>
+	<include refid="query_order"></include>
+  </where>
+  limit ${pageQuery.start},${pageQuery.rows}
+	</select>
+	
+	<select id="findPbsOrderInfoCount" parameterType="pbs.base.pojo.vo.PbsOrderInfoQueryVo"
+	resultType="int">
+	SELECT count(*)
+	FROM
+	  pbs_order_info order
+	<where>
+		<include refid="query_order"></include>
+	</where>
+	</select>
+
+</mapper>
