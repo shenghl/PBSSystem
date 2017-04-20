@@ -20,7 +20,7 @@ import pbs.base.process.result.ResultInfo;
 import pbs.base.process.result.ResultUtil;
 import pbs.base.process.result.SubmitResultInfo;
 import pbs.base.service.BikeService;
-import pbs.base.service.MapService;
+import pbs.business.service.MapService;
 
 @Controller
 @RequestMapping("/map")

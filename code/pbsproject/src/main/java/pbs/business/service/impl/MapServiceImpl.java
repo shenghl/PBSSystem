@@ -1,4 +1,4 @@
-package pbs.base.service.impl;
+package pbs.business.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +14,8 @@ import pbs.base.pojo.po.PbsRentInfo;
 import pbs.base.pojo.po.PbsRentInfoExample;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
-import pbs.base.service.MapService;
+import pbs.business.pojo.po.Locations;
+import pbs.business.service.MapService;
 import pbs.wechat.util.HttpUtils;
 
 public class MapServiceImpl implements MapService{
@@ -53,25 +54,28 @@ public class MapServiceImpl implements MapService{
 	}
 
 	@Override
-	public List<PbsRentInfoCustom> findConvertRentList(
-			PbsRentInfoQueryVo pbsRentInfoQueryVo) throws Exception {
-		List<PbsRentInfoCustom> list = pbsRentInfoMapperCustom.findPbsRentInfoList(pbsRentInfoQueryVo);
+	public Locations convertLocations(String lat, String lng) throws Exception {
 		Map<String,String> params = new HashMap<String,String>();
-		//for(PbsRentInfoCustom rent:list){
-		PbsRentInfoCustom rent = list.get(0);
-			Double lat = rent.getLat();
-			Double lng = rent.getLng();
-			String locations = lng + "," +lat;
-			String coordsys = "gps";
-			String key = "7e76bd669fb03c33ead0c58f894f51ee";
-			String url = "http://restapi.amap.com/v3/assistant/coordinate/convert";
-			params.put("locations", locations);
-			params.put("coordsys", coordsys);
-			params.put("key", key);
-			String convertData = HttpUtils.sendGet(url, params);
-			//String data = JSONObject.fromObject(convertData).getString("data");
-			System.out.println(convertData);
-		//}
-		return null;
+		String locations = lng + "," +lat;
+		String coordsys = "gps";
+		String key = "7e76bd669fb03c33ead0c58f894f51ee";
+		String url = "http://restapi.amap.com/v3/assistant/coordinate/convert";
+		params.put("locations", locations);
+		params.put("coordsys", coordsys);
+		params.put("key", key);
+		String convertData = HttpUtils.sendGet(url, params);
+		//System.out.println(convertData);
+		String data = JSONObject.fromObject(convertData).getString("locations");
+		//System.out.println(data);
+		String[] strArray = null;   
+	    strArray = data.split(",");
+	    //System.out.println(strArray.toString());
+	    lng = strArray[0];
+	    lat = strArray[1];
+	    Locations lo = new Locations();
+	    lo.setcLat(Double.parseDouble(lat));
+	    lo.setcLng(Double.parseDouble(lng));
+		return lo;
 	}
+
 }

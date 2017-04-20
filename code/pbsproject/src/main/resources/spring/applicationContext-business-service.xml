@@ -13,5 +13,6 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
 
-
+<!-- 地图管理 -->
+<bean id="mapService" class="pbs.business.service.impl.MapServiceImpl"/>
 </beans>

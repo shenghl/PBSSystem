@@ -20,7 +20,8 @@ import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
 import pbs.base.process.result.DataGridResultInfo;
-import pbs.base.service.MapService;
+import pbs.business.pojo.po.Locations;
+import pbs.business.service.MapService;
 import pbs.wechat.dispatcher.EventDispatcher;
 import pbs.wechat.dispatcher.MsgDispatcher;
 import pbs.wechat.util.MessageUtil;
@@ -37,7 +38,7 @@ public class WechatAction {
 	
 	@RequestMapping("/jssdkconfig")
 	public String jssdk(){
-		return "/base/wechat/yongche";
+		return "/base/wechat/wechatfirst";
 	}
 	
 
@@ -125,5 +126,11 @@ public class WechatAction {
 		return dataGridResultInfo;
 	}
 	
-	
+	@RequestMapping("/convert")
+	public @ResponseBody Locations convert(
+			@RequestParam(value="lat",required=true) String lat,
+			@RequestParam(value="lng",required=true) String lng)throws Exception{
+		Locations lo = mapService.convertLocations(lat, lng);
+		return lo;
+	}
 }

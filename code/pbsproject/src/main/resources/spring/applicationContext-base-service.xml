@@ -21,6 +21,5 @@
 <bean id="rentService" class="pbs.base.service.impl.RentServiceImpl"/>
 <!-- 车桩管理 -->
 <bean id="nodeService" class="pbs.base.service.impl.NodeServiceImpl"/>
-<!-- 地图管理 -->
-<bean id="mapService" class="pbs.base.service.impl.MapServiceImpl"/>
+
 </beans>

@@ -94,30 +94,43 @@ var longitude;
 	            //center: [longitude, latitude]
 	        });
 			
-			AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.Geolocation'],function(){
-		        var toolBar = new AMap.ToolBar();
-		        var scale = new AMap.Scale();
+			AMap.plugin(['AMap.Geolocation'],function(){
 		        var geolocation = new AMap.Geolocation();
-		        map.addControl(toolBar);
-		        map.addControl(scale);
 		        map.addControl(geolocation);
 		    });
 			
+			
+			
 			wx.getLocation({
 			      success: function (res) {
-			        
-			        latitude=res.latitude;
-			        longitude=res.longitude;
-					
-			        map.setCenter([longitude,latitude]);
-					
+					//加载站点信息并标记
 				    loadData();
+					//转换用户经纬度
+				    convertData(res.latitude,res.longitude);
 				    
 			      },
 			      cancel: function (res) {
 			        alert('用户拒绝授权获取地理位置');
 			      }
 			  });
+			
+			function convertData(lat,lng){
+								
+				$.ajax({
+					url : "${baseurl}convert.action",
+					data : {'lat':lat,'lng':lng},
+					dataType : 'json',
+					success : function(data){
+						//alert("转换坐标成功");	
+						latitude = data.cLat;
+						longitude = data.cLng;
+						map.setCenter([longitude,latitude]);
+					},
+					error : function(data){
+						alert("转换坐标失败");
+					}
+				});
+			};
 			
 			function loadData(){
 				$.ajax({
@@ -128,6 +141,10 @@ var longitude;
 						   //测试总条数   2360  测试通过
 						   console.log("记录总数=="+data.total);
 						   console.log("rentnamelist=="+data.rows[0].id);
+						   
+						   var infoWindow = new AMap.InfoWindow({
+		    					offset: new AMap.Pixel(0, -30)  
+		    				   });
 						   //循环输出点位标记
 						  for(var i = 0;i<data.total;i++){
 							  var icon = new AMap.Icon({
@@ -136,12 +153,23 @@ var longitude;
 			    				});
 			    				marker = new AMap.Marker({
 			    					icon: icon,
-			    					position: [data.rows[i].lng,data.rows[i].lat],
+			    					position: [data.rows[i].cLng,data.rows[i].cLat],
 			    					offset: new AMap.Pixel(-12,-12),
 			    					title: data.rows[i].id+":"+data.rows[i].rentName+":"+data.rows[i].lng+","+data.rows[i].lat,
 			    					map: map
 			    				});
+			    	        	
+			    	        	marker.content = data.rows[i].id+":"+data.rows[i].rentName;
+			    	            marker.on('click', markerClick);
+			    	            //marker.emit('click', {target: marker});//触发事件
+			    	            
+			    	        	 
 						  }
+						  //添加标签
+						  function markerClick(e) {
+		    	                infoWindow.setContent(e.target.content);
+		    	                infoWindow.open(map, e.target.getPosition());
+		    	            }
 					   },
 					   error : function(){
 						   alert("加载站点失败");
