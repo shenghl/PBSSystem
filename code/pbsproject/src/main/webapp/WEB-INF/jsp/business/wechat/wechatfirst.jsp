@@ -37,7 +37,7 @@ var longitude;
 	//function jssdk() {
 	$(function(){
 		$.ajax({
-			url : "http://ry16704270.imwork.net/pbsproject/wechatconfig.action",
+			url : "${baseurl}wechatconfig.action",
 			type : 'post',
 			dataType : 'json',
 			contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -46,7 +46,7 @@ var longitude;
 			},
 			success : function(data) {
 				wx.config({
-					debug : true,
+					debug : false,
 					appId : data.data.appId,
 					timestamp : data.data.timestamp,
 					nonceStr : data.data.nonceStr,
@@ -143,7 +143,7 @@ var longitude;
 						   console.log("rentnamelist=="+data.rows[0].id);
 						   
 						   var infoWindow = new AMap.InfoWindow({
-		    					offset: new AMap.Pixel(0, -30)  
+		    					offset: new AMap.Pixel(0, 10)  
 		    				   });
 						   //循环输出点位标记
 						  for(var i = 0;i<data.total;i++){
@@ -154,12 +154,12 @@ var longitude;
 			    				marker = new AMap.Marker({
 			    					icon: icon,
 			    					position: [data.rows[i].cLng,data.rows[i].cLat],
-			    					offset: new AMap.Pixel(-12,-12),
+			    					offset: new AMap.Pixel(-10,10),
 			    					title: data.rows[i].id+":"+data.rows[i].rentName+":"+data.rows[i].lng+","+data.rows[i].lat,
 			    					map: map
 			    				});
 			    	        	
-			    	        	marker.content = data.rows[i].id+":"+data.rows[i].rentName;
+			    	        	marker.content = data.rows[i].rentName +"<br>"+"可用车辆:"+ data.rows[i].operNum +"<br>"+"<a href=javascript:test()>预约</a>";
 			    	            marker.on('click', markerClick);
 			    	            //marker.emit('click', {target: marker});//触发事件
 			    	            
@@ -179,11 +179,10 @@ var longitude;
 			
 		});
 	
-
-	function isWeiXin5() {
-		var ua = window.navigator.userAgent.toLowerCase();
-		var reg = /MicroMessenger\/[5-9]/i;
-		return reg.test(ua);
+		
+	function test(){
+		//alert(111);
+		location.href="${baseurl}yuyue.action";
 	}
 
 </script>

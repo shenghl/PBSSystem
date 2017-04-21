@@ -1053,6 +1053,66 @@ public class PbsRentInfoExample {
             addCriterion("C_LNG not between", value1, value2, "cLng");
             return (Criteria) this;
         }
+
+        public Criteria andOperNumIsNull() {
+            addCriterion("OPER_NUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumIsNotNull() {
+            addCriterion("OPER_NUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumEqualTo(Integer value) {
+            addCriterion("OPER_NUM =", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumNotEqualTo(Integer value) {
+            addCriterion("OPER_NUM <>", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumGreaterThan(Integer value) {
+            addCriterion("OPER_NUM >", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("OPER_NUM >=", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumLessThan(Integer value) {
+            addCriterion("OPER_NUM <", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumLessThanOrEqualTo(Integer value) {
+            addCriterion("OPER_NUM <=", value, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumIn(List<Integer> values) {
+            addCriterion("OPER_NUM in", values, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumNotIn(List<Integer> values) {
+            addCriterion("OPER_NUM not in", values, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumBetween(Integer value1, Integer value2) {
+            addCriterion("OPER_NUM between", value1, value2, "operNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("OPER_NUM not between", value1, value2, "operNum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

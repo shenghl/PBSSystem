@@ -23,13 +23,15 @@
 	resultType="pbs.base.pojo.vo.PbsOrderInfoCustom">
 	SELECT 
 	  order.ID,
-	  order.rent_start rentStart,
-	  order.node_start nodeStart,
-	  order.rent_end rentEnd,
-	  order.node_end nodeEnd,
-	  order.time_start timeStart,
-	  order.time_end timeEnd,
-	  order.comment
+	  order.order_bm orderBm,
+	  order.openid,
+	  order.bike_bm bikeBm,
+	  order.node_bm_start nodeBmStart,
+	  order.node_bm_end nodeBmEnd,
+	  order.type,
+	  order.state,
+	  order.start_time startTime,
+	  order.end_time endTime
 	FROM
 	  pbs_order_info order
   <where>

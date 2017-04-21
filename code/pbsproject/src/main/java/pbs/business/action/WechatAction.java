@@ -1,11 +1,15 @@
 package pbs.business.action;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +26,12 @@ import pbs.base.pojo.vo.PbsRentInfoQueryVo;
 import pbs.base.process.result.DataGridResultInfo;
 import pbs.business.pojo.po.Locations;
 import pbs.business.service.MapService;
+import pbs.util.ResourcesUtil;
 import pbs.wechat.dispatcher.EventDispatcher;
 import pbs.wechat.dispatcher.MsgDispatcher;
+import pbs.wechat.util.HttpUtils;
+import pbs.wechat.util.JSSDK_Config;
+import pbs.wechat.util.Message;
 import pbs.wechat.util.MessageUtil;
 import pbs.wechat.util.WechatSignUtil;
 
@@ -38,9 +46,19 @@ public class WechatAction {
 	
 	@RequestMapping("/jssdkconfig")
 	public String jssdk(){
-		return "/base/wechat/wechatfirst";
+		return "/business/wechat/wechatfirst";
 	}
 	
+	@RequestMapping("/wechatconfig")
+	public @ResponseBody Message JSSDK_config(@RequestParam(value = "url",required = true) String url){
+		try {
+			System.out.println(url);
+			Map<String,String> configMap = JSSDK_Config.jsSDK_Sign(url);
+			return Message.success(configMap);
+		} catch (Exception e) {
+			return Message.error();
+		}
+	}
 
 	@RequestMapping(value="/security",method= RequestMethod.GET)
 	public void doGet(
@@ -90,7 +108,7 @@ public class WechatAction {
 			@RequestParam(value="node",required=true) String node){
 		model.addAttribute("rent", rent);
 		model.addAttribute("node", node);
-		return "/base/wechat/riding";
+		return "/business/wechat/riding";
 	}
 	
 	@RequestMapping("/querymap_result")
@@ -132,5 +150,36 @@ public class WechatAction {
 			@RequestParam(value="lng",required=true) String lng)throws Exception{
 		Locations lo = mapService.convertLocations(lat, lng);
 		return lo;
+	}
+	
+	//预约跳转
+	@RequestMapping("/yuyue")
+	public String yuyue()throws Exception{
+		
+		return "/business/wechat/yuyue";
+	}
+	
+	//订单跳转
+	@RequestMapping("/myorder")
+	public String myorder()throws Exception{
+		return "/business/wechat/myorder";
+	}
+	
+	//网页授权，得到用户的openid
+	@RequestMapping("/authorize")
+	public String authorize(
+			HttpServletRequest request,
+			@RequestParam(value="code",required=true) String code)throws Exception{
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("appid", ResourcesUtil.getValue("wechat", "appid"));
+		params.put("secret", ResourcesUtil.getValue("wechat", "AppSecret"));
+		params.put("code", code);
+		params.put("grant_type", "authorization_code");
+		String message = HttpUtils.sendGet(ResourcesUtil.getValue("interface_url", "getOpenid"), params);
+		System.out.println(message);
+		String openid = JSONObject.fromObject(message).getString("openid");
+		HttpSession session = request.getSession();
+		session.setAttribute("openid", openid);
+		return "/business/wechat/yuyue";
 	}
 }

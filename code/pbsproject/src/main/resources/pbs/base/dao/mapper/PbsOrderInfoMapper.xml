@@ -3,13 +3,15 @@
 <mapper namespace="pbs.base.dao.mapper.PbsOrderInfoMapper" >
   <resultMap id="BaseResultMap" type="pbs.base.pojo.po.PbsOrderInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="rent_start" property="rentStart" jdbcType="INTEGER" />
-    <result column="node_start" property="nodeStart" jdbcType="INTEGER" />
-    <result column="rent_end" property="rentEnd" jdbcType="INTEGER" />
-    <result column="node_end" property="nodeEnd" jdbcType="INTEGER" />
-    <result column="time_start" property="timeStart" jdbcType="TIMESTAMP" />
-    <result column="time_end" property="timeEnd" jdbcType="TIMESTAMP" />
-    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="order_bm" property="orderBm" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="bike_bm" property="bikeBm" jdbcType="VARCHAR" />
+    <result column="node_bm_start" property="nodeBmStart" jdbcType="VARCHAR" />
+    <result column="node_bm_end" property="nodeBmEnd" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, rent_start, node_start, rent_end, node_end, time_start, time_end, comment
+    id, order_bm, openid, bike_bm, node_bm_start, node_bm_end, type, state, start_time, 
+    end_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pbs.base.pojo.po.PbsOrderInfoExample" >
     select
@@ -103,12 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="pbs.base.pojo.po.PbsOrderInfo" >
-    insert into pbs_order_info (id, rent_start, node_start, 
-      rent_end, node_end, time_start, 
-      time_end, comment)
-    values (#{id,jdbcType=INTEGER}, #{rentStart,jdbcType=INTEGER}, #{nodeStart,jdbcType=INTEGER}, 
-      #{rentEnd,jdbcType=INTEGER}, #{nodeEnd,jdbcType=INTEGER}, #{timeStart,jdbcType=TIMESTAMP}, 
-      #{timeEnd,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR})
+    insert into pbs_order_info (id, order_bm, openid, 
+      bike_bm, node_bm_start, node_bm_end, 
+      type, state, start_time, 
+      end_time)
+    values (#{id,jdbcType=INTEGER}, #{orderBm,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{bikeBm,jdbcType=VARCHAR}, #{nodeBmStart,jdbcType=VARCHAR}, #{nodeBmEnd,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="pbs.base.pojo.po.PbsOrderInfo" >
     insert into pbs_order_info
@@ -116,52 +121,64 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="rentStart != null" >
-        rent_start,
+      <if test="orderBm != null" >
+        order_bm,
       </if>
-      <if test="nodeStart != null" >
-        node_start,
+      <if test="openid != null" >
+        openid,
       </if>
-      <if test="rentEnd != null" >
-        rent_end,
+      <if test="bikeBm != null" >
+        bike_bm,
       </if>
-      <if test="nodeEnd != null" >
-        node_end,
+      <if test="nodeBmStart != null" >
+        node_bm_start,
       </if>
-      <if test="timeStart != null" >
-        time_start,
+      <if test="nodeBmEnd != null" >
+        node_bm_end,
       </if>
-      <if test="timeEnd != null" >
-        time_end,
+      <if test="type != null" >
+        type,
       </if>
-      <if test="comment != null" >
-        comment,
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="rentStart != null" >
-        #{rentStart,jdbcType=INTEGER},
+      <if test="orderBm != null" >
+        #{orderBm,jdbcType=VARCHAR},
       </if>
-      <if test="nodeStart != null" >
-        #{nodeStart,jdbcType=INTEGER},
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="rentEnd != null" >
-        #{rentEnd,jdbcType=INTEGER},
+      <if test="bikeBm != null" >
+        #{bikeBm,jdbcType=VARCHAR},
       </if>
-      <if test="nodeEnd != null" >
-        #{nodeEnd,jdbcType=INTEGER},
+      <if test="nodeBmStart != null" >
+        #{nodeBmStart,jdbcType=VARCHAR},
       </if>
-      <if test="timeStart != null" >
-        #{timeStart,jdbcType=TIMESTAMP},
+      <if test="nodeBmEnd != null" >
+        #{nodeBmEnd,jdbcType=VARCHAR},
       </if>
-      <if test="timeEnd != null" >
-        #{timeEnd,jdbcType=TIMESTAMP},
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
       </if>
-      <if test="comment != null" >
-        #{comment,jdbcType=VARCHAR},
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -177,26 +194,32 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.rentStart != null" >
-        rent_start = #{record.rentStart,jdbcType=INTEGER},
+      <if test="record.orderBm != null" >
+        order_bm = #{record.orderBm,jdbcType=VARCHAR},
       </if>
-      <if test="record.nodeStart != null" >
-        node_start = #{record.nodeStart,jdbcType=INTEGER},
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
       </if>
-      <if test="record.rentEnd != null" >
-        rent_end = #{record.rentEnd,jdbcType=INTEGER},
+      <if test="record.bikeBm != null" >
+        bike_bm = #{record.bikeBm,jdbcType=VARCHAR},
       </if>
-      <if test="record.nodeEnd != null" >
-        node_end = #{record.nodeEnd,jdbcType=INTEGER},
+      <if test="record.nodeBmStart != null" >
+        node_bm_start = #{record.nodeBmStart,jdbcType=VARCHAR},
       </if>
-      <if test="record.timeStart != null" >
-        time_start = #{record.timeStart,jdbcType=TIMESTAMP},
+      <if test="record.nodeBmEnd != null" >
+        node_bm_end = #{record.nodeBmEnd,jdbcType=VARCHAR},
       </if>
-      <if test="record.timeEnd != null" >
-        time_end = #{record.timeEnd,jdbcType=TIMESTAMP},
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.comment != null" >
-        comment = #{record.comment,jdbcType=VARCHAR},
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -206,13 +229,15 @@
   <update id="updateByExample" parameterType="map" >
     update pbs_order_info
     set id = #{record.id,jdbcType=INTEGER},
-      rent_start = #{record.rentStart,jdbcType=INTEGER},
-      node_start = #{record.nodeStart,jdbcType=INTEGER},
-      rent_end = #{record.rentEnd,jdbcType=INTEGER},
-      node_end = #{record.nodeEnd,jdbcType=INTEGER},
-      time_start = #{record.timeStart,jdbcType=TIMESTAMP},
-      time_end = #{record.timeEnd,jdbcType=TIMESTAMP},
-      comment = #{record.comment,jdbcType=VARCHAR}
+      order_bm = #{record.orderBm,jdbcType=VARCHAR},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      bike_bm = #{record.bikeBm,jdbcType=VARCHAR},
+      node_bm_start = #{record.nodeBmStart,jdbcType=VARCHAR},
+      node_bm_end = #{record.nodeBmEnd,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,39 +245,47 @@
   <update id="updateByPrimaryKeySelective" parameterType="pbs.base.pojo.po.PbsOrderInfo" >
     update pbs_order_info
     <set >
-      <if test="rentStart != null" >
-        rent_start = #{rentStart,jdbcType=INTEGER},
+      <if test="orderBm != null" >
+        order_bm = #{orderBm,jdbcType=VARCHAR},
       </if>
-      <if test="nodeStart != null" >
-        node_start = #{nodeStart,jdbcType=INTEGER},
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="rentEnd != null" >
-        rent_end = #{rentEnd,jdbcType=INTEGER},
+      <if test="bikeBm != null" >
+        bike_bm = #{bikeBm,jdbcType=VARCHAR},
       </if>
-      <if test="nodeEnd != null" >
-        node_end = #{nodeEnd,jdbcType=INTEGER},
+      <if test="nodeBmStart != null" >
+        node_bm_start = #{nodeBmStart,jdbcType=VARCHAR},
       </if>
-      <if test="timeStart != null" >
-        time_start = #{timeStart,jdbcType=TIMESTAMP},
+      <if test="nodeBmEnd != null" >
+        node_bm_end = #{nodeBmEnd,jdbcType=VARCHAR},
       </if>
-      <if test="timeEnd != null" >
-        time_end = #{timeEnd,jdbcType=TIMESTAMP},
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="comment != null" >
-        comment = #{comment,jdbcType=VARCHAR},
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="pbs.base.pojo.po.PbsOrderInfo" >
     update pbs_order_info
-    set rent_start = #{rentStart,jdbcType=INTEGER},
-      node_start = #{nodeStart,jdbcType=INTEGER},
-      rent_end = #{rentEnd,jdbcType=INTEGER},
-      node_end = #{nodeEnd,jdbcType=INTEGER},
-      time_start = #{timeStart,jdbcType=TIMESTAMP},
-      time_end = #{timeEnd,jdbcType=TIMESTAMP},
-      comment = #{comment,jdbcType=VARCHAR}
+    set order_bm = #{orderBm,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      bike_bm = #{bikeBm,jdbcType=VARCHAR},
+      node_bm_start = #{nodeBmStart,jdbcType=VARCHAR},
+      node_bm_end = #{nodeBmEnd,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

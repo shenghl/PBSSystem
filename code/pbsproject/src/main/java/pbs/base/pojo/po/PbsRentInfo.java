@@ -31,6 +31,8 @@ public class PbsRentInfo {
 
     private Double cLng;
 
+    private Integer operNum;
+
     public Integer getId() {
         return id;
     }
@@ -149,5 +151,13 @@ public class PbsRentInfo {
 
     public void setcLng(Double cLng) {
         this.cLng = cLng;
+    }
+
+    public Integer getOperNum() {
+        return operNum;
+    }
+
+    public void setOperNum(Integer operNum) {
+        this.operNum = operNum;
     }
 }

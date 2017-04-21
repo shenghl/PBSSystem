@@ -5,19 +5,23 @@ import java.util.Date;
 public class PbsOrderInfo {
     private Integer id;
 
-    private Integer rentStart;
+    private String orderBm;
 
-    private Integer nodeStart;
+    private String openid;
 
-    private Integer rentEnd;
+    private String bikeBm;
 
-    private Integer nodeEnd;
+    private String nodeBmStart;
 
-    private Date timeStart;
+    private String nodeBmEnd;
 
-    private Date timeEnd;
+    private Integer type;
 
-    private String comment;
+    private Integer state;
+
+    private Date startTime;
+
+    private Date endTime;
 
     public Integer getId() {
         return id;
@@ -27,59 +31,75 @@ public class PbsOrderInfo {
         this.id = id;
     }
 
-    public Integer getRentStart() {
-        return rentStart;
+    public String getOrderBm() {
+        return orderBm;
     }
 
-    public void setRentStart(Integer rentStart) {
-        this.rentStart = rentStart;
+    public void setOrderBm(String orderBm) {
+        this.orderBm = orderBm == null ? null : orderBm.trim();
     }
 
-    public Integer getNodeStart() {
-        return nodeStart;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setNodeStart(Integer nodeStart) {
-        this.nodeStart = nodeStart;
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
     }
 
-    public Integer getRentEnd() {
-        return rentEnd;
+    public String getBikeBm() {
+        return bikeBm;
     }
 
-    public void setRentEnd(Integer rentEnd) {
-        this.rentEnd = rentEnd;
+    public void setBikeBm(String bikeBm) {
+        this.bikeBm = bikeBm == null ? null : bikeBm.trim();
     }
 
-    public Integer getNodeEnd() {
-        return nodeEnd;
+    public String getNodeBmStart() {
+        return nodeBmStart;
     }
 
-    public void setNodeEnd(Integer nodeEnd) {
-        this.nodeEnd = nodeEnd;
+    public void setNodeBmStart(String nodeBmStart) {
+        this.nodeBmStart = nodeBmStart == null ? null : nodeBmStart.trim();
     }
 
-    public Date getTimeStart() {
-        return timeStart;
+    public String getNodeBmEnd() {
+        return nodeBmEnd;
     }
 
-    public void setTimeStart(Date timeStart) {
-        this.timeStart = timeStart;
+    public void setNodeBmEnd(String nodeBmEnd) {
+        this.nodeBmEnd = nodeBmEnd == null ? null : nodeBmEnd.trim();
     }
 
-    public Date getTimeEnd() {
-        return timeEnd;
+    public Integer getType() {
+        return type;
     }
 
-    public void setTimeEnd(Date timeEnd) {
-        this.timeEnd = timeEnd;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public String getComment() {
-        return comment;
+    public Integer getState() {
+        return state;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

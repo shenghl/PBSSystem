@@ -3,7 +3,7 @@
             {
                 "type": "view", 
                 "name": "点我用车", 
-                "url": "https://www.baidu.com", 
+                "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7389161d04e4f201&redirect_uri=http://ry16704270.imwork.net/pbsproject/wechat/authorize.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect", 
                 "sub_button": [ ]
             }, {
                 "type": "view", 
@@ -13,8 +13,13 @@
             }, {
                 "type": "view", 
                 "name": "用户服务", 
-                "url": "https://www.baidu.com", 
+                "url": "http://ry16704270.imwork.net/pbsproject/wechat/jssdkconfig.action", 
                 "sub_button": [ ]
             }
         ]
 }
+
+//网页授权
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7389161d04e4f201&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
+//我的openid
+ojgEp1kS_KSKGaZQwWTfUk0iVf1E

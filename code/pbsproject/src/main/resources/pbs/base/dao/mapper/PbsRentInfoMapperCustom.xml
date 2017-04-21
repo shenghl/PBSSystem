@@ -31,7 +31,8 @@
 	  rent.LAT lat,
 	  rent.LNG lng,
 	  rent.C_LAT cLat,
-	  rent.C_LNG cLng
+	  rent.C_LNG cLng,
+	  rent.OPER_NUM operNum
 	FROM
 	  pbs_rent_info rent
   <where>
