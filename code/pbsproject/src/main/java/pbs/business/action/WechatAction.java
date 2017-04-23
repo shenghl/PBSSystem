@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pbs.base.pojo.po.PbsOrderInfo;
 import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
 import pbs.base.process.result.DataGridResultInfo;
+import pbs.base.process.result.OrderResult;
+import pbs.base.service.OrderService;
 import pbs.business.pojo.po.Locations;
 import pbs.business.service.MapService;
 import pbs.util.ResourcesUtil;
@@ -41,6 +44,9 @@ public class WechatAction {
 	
 	@Autowired
 	private MapService mapService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	private static Logger logger = Logger.getLogger(WechatSignUtil.class);
 	
@@ -164,6 +170,27 @@ public class WechatAction {
 	public String myorder()throws Exception{
 		return "/business/wechat/myorder";
 	}
+	
+	//加载订单数据
+	@RequestMapping("/queryorder_result")
+	public @ResponseBody OrderResult queryOrder_result(
+			@RequestParam(value="openid",required=true) String openid)throws Exception{
+		List<PbsOrderInfo> list = orderService.findPbsOrderInfoByOpenid(openid);
+		//System.out.println(list);
+		OrderResult orderResult = new OrderResult();
+		orderResult.setRows(list);
+		return orderResult;
+	}
+	
+//	@RequestMapping("/queryorder_result")
+//	public @ResponseBody String queryOrder_result(
+//			@RequestParam(value="openid",required=true) String openid)throws Exception{
+//		List<PbsOrderInfo> list = orderService.findPbsOrderInfoByOpenid(openid);
+//		System.out.println(list);
+//		OrderResult orderResult = new OrderResult();
+//		orderResult.setRows(list);
+//		return "a";
+//	}
 	
 	//网页授权，得到用户的openid
 	@RequestMapping("/authorize")

@@ -21,5 +21,6 @@
 <bean id="rentService" class="pbs.base.service.impl.RentServiceImpl"/>
 <!-- 车桩管理 -->
 <bean id="nodeService" class="pbs.base.service.impl.NodeServiceImpl"/>
-
+<!-- 车桩管理 -->
+<bean id="orderService" class="pbs.base.service.impl.OrderServiceImpl"/>
 </beans>

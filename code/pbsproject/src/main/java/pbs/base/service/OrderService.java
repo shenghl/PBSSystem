@@ -2,6 +2,7 @@ package pbs.base.service;
 
 import java.util.List;
 
+import pbs.base.pojo.po.PbsOrderInfo;
 import pbs.base.pojo.vo.PbsOrderInfoCustom;
 import pbs.base.pojo.vo.PbsOrderInfoQueryVo;
 
@@ -11,6 +12,8 @@ public interface OrderService {
 	
 	public int findPbsOrderInfoCount(PbsOrderInfoQueryVo pbsOrderInfoQueryVo) throws Exception;
 	
+	//根据openid查询
+	public List<PbsOrderInfo> findPbsOrderInfoByOpenid(String openid)throws Exception;
 	//插入订单信息
 	public void insertPbsOrderInfo(PbsOrderInfoCustom pbsOrderInfoCustom) throws Exception;
 	

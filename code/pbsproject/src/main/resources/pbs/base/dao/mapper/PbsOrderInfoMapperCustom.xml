@@ -4,22 +4,16 @@
 
 	<sql id="query_order">
 		<if test="pbsOrderInfoCustom!=null">
-			<if test="pbsOrderInfoCustom.id!=null and pbsOrderInfoCustom.id!=''">
-				and rent.id = #{pbsRentInfoCustom.id}
+			<if test="pbsOrderInfoCustom.orderBm!=null and pbsOrderInfoCustom.orderBm!=''">
+				and order.orderBm = #{pbsorderInfoCustom.orderBm}
 			</if>
-			<if test="pbsOrderInfoCustom.zoneName!=null and pbsOrderInfoCustom.zoneName!=''">
-				and rent.zone_name = #{pbsRentInfoCustom.zoneName}
-			</if>
-			<if test="pbsOrderInfoCustom.road!=null and pbsOrderInfoCustom.road!=''">
-				and rent.road = #{pbsRentInfoCustom.road}
-			</if>
-			<if test="pbsOrderInfoCustom.rentName!=null and pbsOrderInfoCustom.rentName!=''">
-				and rent.rent_name = #{pbsRentInfoCustom.rentName}
+			<if test="pbsOrderInfoCustom.openid!=null and pbsOrderInfoCustom.openid!=''">
+				and order.openid = #{pbsRentInfoCustom.openid}
 			</if>
 		</if>
 	</sql>
 
-	<select id="findPbsRentInfoList" parameterType="pbs.base.pojo.vo.PbsOrderInfoQueryVo" 
+	<select id="findPbsOrderInfoList" parameterType="pbs.base.pojo.vo.PbsOrderInfoQueryVo" 
 	resultType="pbs.base.pojo.vo.PbsOrderInfoCustom">
 	SELECT 
 	  order.ID,

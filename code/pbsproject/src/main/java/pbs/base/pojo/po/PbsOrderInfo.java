@@ -2,6 +2,8 @@ package pbs.base.pojo.po;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PbsOrderInfo {
     private Integer id;
 
@@ -87,19 +89,34 @@ public class PbsOrderInfo {
         this.state = state;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getStartTime() {
         return startTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getEndTime() {
         return endTime;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+	@Override
+	public String toString() {
+		return "PbsOrderInfo [id=" + id + ", orderBm=" + orderBm + ", openid="
+				+ openid + ", bikeBm=" + bikeBm + ", nodeBmStart="
+				+ nodeBmStart + ", nodeBmEnd=" + nodeBmEnd + ", type=" + type
+				+ ", state=" + state + ", startTime=" + startTime
+				+ ", endTime=" + endTime + "]";
+	}
+    
+    
 }

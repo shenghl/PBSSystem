@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pbs.base.dao.mapper.PbsOrderInfoMapper;
 import pbs.base.dao.mapper.PbsOrderInfoMapperCustom;
 import pbs.base.pojo.po.PbsOrderInfo;
+import pbs.base.pojo.po.PbsOrderInfoExample;
 import pbs.base.pojo.vo.PbsOrderInfoCustom;
 import pbs.base.pojo.vo.PbsOrderInfoQueryVo;
 import pbs.base.process.context.Config;
@@ -34,6 +35,15 @@ public class OrderServiceImpl implements OrderService{
 		return pbsOrderInfoMapperCustom.findPbsOrderInfoCount(pbsOrderInfoQueryVo);
 	}
 
+	public List<PbsOrderInfo> findPbsOrderInfoByOpenid(String openid)throws Exception{
+		PbsOrderInfoExample pbsOrderInfoExample = new PbsOrderInfoExample();
+		PbsOrderInfoExample.Criteria criteria = pbsOrderInfoExample.createCriteria();
+		//设置查询条件
+		criteria.andOpenidEqualTo(openid);
+		List<PbsOrderInfo> list = pbsOrderInfoMapper.selectByExample(pbsOrderInfoExample);
+		return list;
+	}
+	
 	@Override
 	public void insertPbsOrderInfo(PbsOrderInfoCustom pbsOrderInfoCustom)
 			throws Exception {

@@ -1,5 +1,6 @@
 package pbs.base.dao.mapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import pbs.base.pojo.po.PbsOrderInfo;
 import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
-import pbs.base.service.RentService;
-import pbs.base.service.impl.RentServiceImpl;
 import pbs.wechat.util.HttpUtils;
 
 public class Convert {
@@ -65,6 +65,28 @@ public class Convert {
 		    rent.setcLat(lat);
 		    rent.setcLng(lng);
 		    pbsRentInfoMapper.updateByPrimaryKeySelective(rent);}
+	}
+	
+	@Test
+	public void testOrder(){
+		// 获取spring容器
+		applicationContext = new ClassPathXmlApplicationContext(new String[] {
+				"spring/applicationContext.xml", "spring/applicationContext-base-dao.xml"
+
+		});
+		
+		PbsOrderInfoMapper pbsOrderInfoMapper = (PbsOrderInfoMapper) applicationContext
+				.getBean("pbsOrderInfoMapper");
+		PbsOrderInfo order = new PbsOrderInfo();
+		order.setBikeBm("234");
+		Long d = 1492780496000L;
+		//order.setStartTime(new Date());
+		//order.setStartTime(d);
+		//pbsOrderInfoMapper.insert(order);
+		PbsOrderInfo pbsOrderInfo = pbsOrderInfoMapper.selectByPrimaryKey(1);
+		Date startTime = pbsOrderInfo.getStartTime();
+		System.out.println(startTime);
+		System.out.println(111);
 	}
 
 }
