@@ -41,13 +41,13 @@
         }
     </style>
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=cfa08784f1be35f90f8b8f27f42b9999&plugin=AMap.Walking"></script>
-<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script type="text/javascript">
 
 var latitude;
 var longitude;
 var map;
 var walking;
+var infoWindow;
 
 	//function jssdk() {
 	$(function(){
@@ -110,7 +110,7 @@ var walking;
 	        });
 		        walking = new AMap.Walking({
 		        map: map,
-		        panel: "panel"
+		       // panel: "panel"
 		    }); 
 		        
 		    map.plugin('AMap.Geolocation', function() {
@@ -186,7 +186,7 @@ var walking;
 						   console.log("记录总数=="+data.total);
 						   console.log("rentnamelist=="+data.rows[0].id);
 						   
-						   var infoWindow = new AMap.InfoWindow({
+						        infoWindow = new AMap.InfoWindow({
 		    					offset: new AMap.Pixel(0, 10)  
 		    				   });
 						   //循环输出点位标记
@@ -226,13 +226,34 @@ var walking;
 	
 		
 		function yuyue(lng,lat){
-			alert(lng+"---"+lat);
 			//location.href="${baseurl}yuyue.action";
-			//步行导航
-			
-			alert(longitude+"?"+latitude+"?"+lng+"?"+lat);
-			walking.search([120.35028, 30.315589], [120.348798828125, 30.318758138021]);
-			alert(111);
+			alert("预约车辆为您保留15分钟，开锁开始计费");
+			//walking.search([120.35028, 30.315589], [120.348798828125, 30.318758138021]);
+			walking.search([longitude, latitude], [lng, lat]);
+			infoWindow.close();
+			$('#mes').show();
+			time();
+			$('#btn').click(function(){
+				$('#mes').hide();
+				walking.clear();
+				});
+		}
+		
+		function time(){
+			var m=14;
+		    var s=59;
+		    setInterval(function(){
+		        if(s<10){
+		            $('#time').html(m+':0'+s);
+		        }else{
+		            $('#time').html(m+':'+s);
+		        }
+		        s--;
+		        if(s<0){
+		            s=59;
+		            m--;
+		        }
+		    },1000);
 		}
 
 </script>
@@ -244,5 +265,10 @@ var walking;
 您的浏览器不支持 HTML5 canvas 标签。</canvas> -->  
 <div id="panel"></div>
 <img id="liji" class="class_liji" alt=".." src="/pbsproject/images/weixin/liji.png" width="120" height="120">
+<div id="mes" style="background-color:white; position:fixed;width:100%;height:10%" hidden>
+<p>还剩时间:</p>
+<p id="time">15:00</p>
+<button id="btn" style="position:fixed;right:10px;top:10px">取消预约</button>
+</div>
 </body>
 </html>
