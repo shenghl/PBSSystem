@@ -52,7 +52,7 @@ public class WechatAction {
 	
 	@RequestMapping("/jssdkconfig")
 	public String jssdk(){
-		return "/business/wechat/wechatfirst";
+		return "/business/wechat/mine";
 	}
 	
 	@RequestMapping("/wechatconfig")
@@ -207,6 +207,19 @@ public class WechatAction {
 		String openid = JSONObject.fromObject(message).getString("openid");
 		HttpSession session = request.getSession();
 		session.setAttribute("openid", openid);
-		return "/business/wechat/yuyue";
+		return "/business/wechat/wechatfirst";
 	}
+	
+	//跳转菜单
+	@RequestMapping("/home")
+	public String home(){
+		return "/business/wechat/home";
+	}
+	
+	//退出登录
+	@RequestMapping("/logout")
+	public String logout(){
+		return "/business/wechat/login";
+	}
+	
 }

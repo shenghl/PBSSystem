@@ -16,7 +16,7 @@
       left:40%;
       top:80%;
       }
-      .class_liji{
+      .class_scan{
       position:fixed;
       left:33%;
       top:70%;
@@ -84,7 +84,7 @@ var infoWindow;
 			}
 		});
 		
-		$("#liji").click(function(){
+		$("#scan").click(function(){
 			wx.scanQRCode({
 			    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
 			    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
@@ -93,11 +93,21 @@ var infoWindow;
 			    //alert(typeof result);
 			    //var a = "{rent:1001,node:1}";
 			    //location.href= "http://ry16704270.imwork.net/pbsproject/wechat/riding.action?message="+a;
-			    location.href=result;
+			    //跳转
+			    //location.href=result;
+			    $('#mes1').show();
+			    time1();
+			    $('#btn1').click(function(){
+					$('#mes1').hide();			    		
+			    });
 			}
 			});
 		});
 		
+		$("#home").click(function(){
+			//alert(111);
+			location.href="${baseurl}home.action";	
+		});
 		
 	});
 	
@@ -255,6 +265,25 @@ var infoWindow;
 		        }
 		    },1000);
 		}
+		
+		//骑行时间计时
+		function time1(){
+			var h=00;
+			var m=00;
+		    var s=01;
+		    setInterval(function(){
+		        if(s<10){
+		            $('#time1').html(h+':'+m+':0'+s);
+		        }else{
+		            $('#time1').html(h+':'+m+':'+s);
+		        }
+		        s++;
+		        if(s==60){
+		            s=0;
+		            m++;
+		        }
+		    },1000);
+		}
 
 </script>
 </head>
@@ -264,11 +293,17 @@ var infoWindow;
 <!--<canvas id="myCanvas" width="200" height="100" style="position:fixed;left:75px;top:400px;border:1px solid #d3d3d3;">
 您的浏览器不支持 HTML5 canvas 标签。</canvas> -->  
 <div id="panel"></div>
-<img id="liji" class="class_liji" alt=".." src="/pbsproject/images/weixin/liji.png" width="120" height="120">
+<img id="scan" class="class_scan" alt=".." src="/pbsproject/images/weixin/scan.png" width="120" height="120">
 <div id="mes" style="background-color:white; position:fixed;width:100%;height:10%" hidden>
 <p>还剩时间:</p>
 <p id="time">15:00</p>
 <button id="btn" style="position:fixed;right:10px;top:10px">取消预约</button>
 </div>
+<div id="mes1" style="background-color:white; position:fixed;width:100%;height:10%" hidden>
+<p>正在骑行:</p>
+<p id="time1">00:00:00</p>
+<button id="btn1" style="position:fixed;right:10px;top:10px">结束骑行</button>
+</div>
+<img id="home" alt="菜单" src="/pbsproject/images/weixin/icon-link4.png" width="30" height="30" style="position:fixed;top:85%;right:10%">
 </body>
 </html>

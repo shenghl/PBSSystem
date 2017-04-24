@@ -23,3 +23,5 @@
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7389161d04e4f201&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
 //我的openid
 ojgEp1kS_KSKGaZQwWTfUk0iVf1E
+//二维码
+http://ry16704270.imwork.net/pbsproject/wechat/riding.action?rent=1001&node=1
