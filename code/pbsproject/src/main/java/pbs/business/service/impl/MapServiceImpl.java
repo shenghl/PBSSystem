@@ -1,6 +1,8 @@
 package pbs.business.service.impl;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,12 +103,20 @@ public class MapServiceImpl implements MapService{
 		return 0;
 	}
 
+	
+	
+	//获取系统当前时间
+	
+	
+	
+	
 	//插入调度信息进入数据库
 	@Override
 	public int savePbsDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom) 
 			throws Exception {
 		//参数校验，非空校验
 		if(pbsDispacherInfoCustom != null){
+			pbsDispacherInfoCustom.setTime(new Timestamp(System.currentTimeMillis()));
 			return pbsRentInfoMapperCustom.savePbsDispacherInfo(pbsDispacherInfoCustom);
 		}
 		return 0;

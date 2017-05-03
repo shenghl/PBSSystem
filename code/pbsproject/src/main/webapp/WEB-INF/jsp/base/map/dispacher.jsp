@@ -10,6 +10,7 @@
 <%@ include file="/WEB-INF/jsp/base/common_css.jsp"%>
 <!-- 底部按钮显示样式 -->
 <%@ include file="/WEB-INF/jsp/base/common_js.jsp"%>
+<script type="text/javascript" src="../js/jquery.1.4.4.min.js"></script>
 <title>自行车调度</title>
 <script type="text/javascript">
   function dispachersave(){
@@ -24,12 +25,20 @@
 	  //第四个参数：dataType预期服务器返回的数据类型,这里action返回json
 	  //根据form的id找到该form的action地址
 	  jquerySubByFId('dispacherform',dispachersave_callback,null,"json");
+
 	  
   }
   //ajax调用的回调函数，ajax请求完成调用此函数，传入的参数是action返回的结果
   function dispachersave_callback(data){
-
+	//清空表单控件在中内容
+	  $("#dispacher_id").val("");
+	  $("#dispacher_num").val("");
+	  $("#dispacher_zt").val("");
+	  //$("#dispacher_id").html("");
+	  
+	 //弹出提示信息
 	  message_alert(data);
+	  //console.log("========"+$("#dispacher_id").html("sdgsdfgsfdg"))
 	  //alert(data.message);
 	  /*if(data.type=='0'){
 		  $.messager.alert('提示信息',data.message,'success');

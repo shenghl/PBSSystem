@@ -17,7 +17,7 @@ public class PbsDispacherInfo {
 	private int num;
 	
 	//调动时间
-	private Date time;
+	private Timestamp time;
 
 	public int getId() {
 		return id;
@@ -51,11 +51,11 @@ public class PbsDispacherInfo {
 		this.num = num;
 	}
 
-	public Date getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
 	
