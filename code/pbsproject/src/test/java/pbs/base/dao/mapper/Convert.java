@@ -53,6 +53,8 @@ public class Convert {
 			params.put("locations", locations);
 			params.put("coordsys", coordsys);
 			params.put("key", key);
+			
+			
 			String convertData = HttpUtils.sendGet(url, params);
 			//System.out.println(convertData);
 			String data = JSONObject.fromObject(convertData).getString("locations");
@@ -64,7 +66,9 @@ public class Convert {
 		    lat = Double.parseDouble(strArray[1]);
 		    rent.setcLat(lat);
 		    rent.setcLng(lng);
-		    pbsRentInfoMapper.updateByPrimaryKeySelective(rent);}
+		    pbsRentInfoMapper.updateByPrimaryKeySelective(rent);
+		    
+		    }
 	}
 	
 	@Test

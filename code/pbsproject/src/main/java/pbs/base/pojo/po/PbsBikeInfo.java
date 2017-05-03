@@ -1,7 +1,5 @@
 package pbs.base.pojo.po;
 
-import java.util.Date;
-
 public class PbsBikeInfo {
     private Long id;
 

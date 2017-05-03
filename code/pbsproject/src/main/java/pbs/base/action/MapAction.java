@@ -12,6 +12,8 @@ import pbs.base.pojo.po.PbsBikeInfo;
 import pbs.base.pojo.vo.PageQuery;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
+import pbs.base.pojo.vo.PbsDispacherInfoCustom;
+import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
 import pbs.base.process.context.Config;
@@ -31,17 +33,18 @@ public class MapAction {
 	
 	int start = 0;
 
-	
+	//跳转至地图界面
 	@RequestMapping("/querymap")
 	public String queryMap(Model model)throws Exception{
 		return "/base/map/querymap";
 	}
 	
+	
+	//加载页面站点
 	@RequestMapping("/querymap_result")
 	public @ResponseBody DataGridResultInfo queryMap_result(
 			PbsRentInfoQueryVo pbsRentInfoQueryVo
 			)throws Exception{
-
 		//非空校验
 		pbsRentInfoQueryVo = pbsRentInfoQueryVo!=null?pbsRentInfoQueryVo:new PbsRentInfoQueryVo();
 		
@@ -69,4 +72,44 @@ public class MapAction {
 		//返回
 		return dataGridResultInfo;
 	}
+	
+	
+	//跳转至调度页面
+		@RequestMapping("/dispacher")
+		public String dispacher(Model model)throws Exception{
+			return "/base/map/dispacher";
+		}
+		
+	//向数据里写入调度数据	提交
+		@RequestMapping("/dispacherSubmit")
+		public @ResponseBody SubmitResultInfo queryDispacher_result(
+				PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo
+				)throws Exception{
+			
+			ResultInfo resultInfo = new ResultInfo();
+			resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+			resultInfo.setMessage("操作成功");
+			resultInfo.setType(1);
+			//异常捕获
+			try {
+				mapService.savePbsDispacherInfo(pbsDispacherInfoQueryVo.getPbsDispacherInfoCustom());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				resultInfo.setType(0);
+			}
+			
+			SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+
+			return submitResultInfo;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

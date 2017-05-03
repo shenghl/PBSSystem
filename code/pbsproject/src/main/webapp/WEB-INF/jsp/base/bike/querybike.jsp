@@ -131,7 +131,6 @@
 	
 	//修改用户
 	function editbike(bm){
-		
 		//打开修改窗口
 		createmodalwindow("修改自行车信息", 800, 250, '${baseurl}bike/editbike.action?bm='+bm);
 	}

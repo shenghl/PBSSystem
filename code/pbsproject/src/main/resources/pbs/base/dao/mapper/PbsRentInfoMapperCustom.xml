@@ -31,8 +31,7 @@
 	  rent.LAT lat,
 	  rent.LNG lng,
 	  rent.C_LAT cLat,
-	  rent.C_LNG cLng,
-	  rent.OPER_NUM operNum
+	  rent.C_LNG cLng
 	FROM
 	  pbs_rent_info rent
   <where>
@@ -50,5 +49,53 @@
 		<include refid="query_rent"></include>
 	</where>
 	</select>
+
+<!-- 以下查询调度信息 -->
+<select id="findPbsDispacherInfoList" parameterType="pbs.base.pojo.vo.PbsDispacherInfoQueryVo" 
+	resultType="pbs.base.pojo.vo.PbsDispacherInfoCustom">
+	SELECT 
+	  dispacher.id,
+	  dispacher.rentId,
+	  dispacher.zt,
+	  dispacher.num,
+	  dispacher.time
+	FROM
+	  pbs_dispacher_info dispacher
+	<!--  
+  <where>
+	<include refid="query_bike"></include>
+  </where>
+  
+  
+  limit ${pageQuery.start},${pageQuery.rows}
+  -->
+	</select>
+	
+	<select id="findPbsDispacherInfoCount" parameterType="pbs.base.pojo.vo.PbsDispacherInfoQueryVo"
+	resultType="int">
+	SELECT count(*)
+	FROM
+	  pbs_dispacher_info dispacher
+	<!--  
+	<where>
+		<include refid="query_bike"></include>
+	</where>
+	-->
+	</select>
+<insert id="savePbsDispacherInfo" parameterType=
+					      "pbs.base.pojo.po.PbsDispacherInfo">
+		insert into pbs_dispacher_info(
+						rentId,
+						zt,
+						num,
+						time
+						) values(
+						#{rentId},
+						#{zt},
+						#{num},
+						#{time}
+						)
+	</insert>
+
 
 </mapper>

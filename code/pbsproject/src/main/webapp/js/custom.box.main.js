@@ -334,8 +334,8 @@ function modalwindow(title,width,height,url){
 	var id = new Date().getMilliseconds();
 	this.windowid="win_"+id;
 	this.iframeid="iframe_"+id;
-
 }
+
 modalwindow.prototype.createWindow = function(){
 	var active = document.createElement("div");
 	active.id="active";

@@ -1,24 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-        <!doctype html>
-<html lang="en">
+	
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <LINK rel="stylesheet" type="text/css"
+	href="${baseurl}js/easyui/styles/default.css">
+	<%@ include file="/WEB-INF/jsp/base/common_css.jsp"%>
+	<%@ include file="/WEB-INF/jsp/base/common_js.jsp"%>
+	<script type="text/javascript" src="../js/easyui/themes/default/easyui.css"></script>
+	<script type="text/javascript" src="../js/easyui/themes/icon.css"></script>
+	<script type="text/javascript" src="../js/custom.box.main.js"></script>
+
     <style type="text/css">
       body,html,#container{
         height: 100%;
         margin: 0px;
         font:12px Arial;
       }
-      .taiwan{
-      	border: solid 1px red;
-      	color: red;
-      	float: left;
-      	width: 50px;
-      	background-color: rgba(255,0,0,0.1)
+     
+      #open{
+      	position:fixed;
+      	top:100px;
+      	bottom:200px;
+      	right:200px;
+      	width:800px;
       }
+      
+      
     </style>
     <title>Marker example</title>
     
@@ -26,10 +39,27 @@
    <script src="../js/jquery-1.4.4.js"></script>
   </head>
   <body>
-   <div id="container" tabindex="0"></div>
+    <!-- 此DIV用于存放地图，不可删除 -->
+   <div id="container"></div>
+   
+		<div class="button-group">
+		    <input type="button" class="button" value="打开调度窗口" onClick="javascript:openInfo()"/>
+		      <input type="button" class="button" value="关闭调度窗体" onClick="javascript:infoWindow.close()"/>
+		    <!--
+		    <input type="button" style="position:fixed" value="按钮"/>
+		    -->
+		    
+		    <!--  
+		    <iframe width=420 height=330 frameborder=0 scrolling=auto src=${baseurl}dispacher.action></iframe>
+		    -->
+		</div>
+		<div id="tip">
+		   点击页面右下角按钮即可开始调度
+		</div>
    <script src="http://webapi.amap.com/maps?v=1.3&key=ee1710c4e180567b17806859073595cc"></script>
    <script type="text/javascript">
    //新建地图 
+   		var infoWindow;
         var map = new AMap.Map('container',{
         	resizeEnable: true,
         	center: [120.161,30.2523],//地图中心点
@@ -41,6 +71,7 @@
 			   type : "post",
 			   dataType : "json",
 			   success : function(data){
+				   console.log(data);
 				   //测试总条数   2360  测试通过
 				   console.log("记录总数=="+data.total);
 				   console.log("rentnamelist=="+data.rows[0].id);
@@ -57,7 +88,7 @@
 	    					icon: icon,
 	    					position: [lng,lat],
 	    					offset: new AMap.Pixel(-10,10),
-	    					title: data.rows[i].id+":"+data.rows[i].rentName+":"+data.rows[i].lng+","+data.rows[i].lat,
+	    					title: data.rows[i].id+":"+data.rows[i].rentName,
 	    					map: map
 	    				});
 				  }
@@ -66,8 +97,38 @@
 				   alert("加载站点失败");
 			   },
 		   });
-       
+		   
+		   
     </script>
-    
   </body>
+    <script type="text/javascript">
+    //跳转至调度页面
+    	function openInfo(){
+    		//createmodalwindow("添加调度信息",800,250,'${baseurl}dispacher.action');
+    		//新窗口打开
+    		//window.open("${baseurl}dispacher.action","","top=100,left=100,width=300,height=200");
+    		
+    		//当前窗口打开
+    		//window.location.href="${baseurl}dispacher.action"; 
+    		
+    		//var div="";
+    		//	div+='<div id="open">';
+	    	//	div+='<iframe  width=800 height=250 frameborder=0 scrolling=auto src=${baseurl}dispacher.action>';
+	    	//	div+='</iframe>';
+    		//	div+='</div>';
+
+    		//var $div = $(div);
+    		//$("#container").append($div);
+    		
+    		//添加iframe
+    		var info = [];
+    		info.push("<iframe  width=800  frameborder=0 scrolling=auto src=${baseurl}dispacher.action>");
+    		infoWindow = new AMap.InfoWindow({
+    			content:info.join("<br/>")
+    		});
+    		infoWindow.open(map,map.getCenter());
+    	}
+    </script>
+    <script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
+    
 </html>

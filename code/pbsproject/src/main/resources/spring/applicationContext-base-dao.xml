@@ -34,7 +34,7 @@
 </bean> -->
 
 <!--配置 mapper自动扫描器
- bean名称就是mapper类型（首字母小写）
+ bean名称就是mapper类名（首字母小写）
  -->
 
 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

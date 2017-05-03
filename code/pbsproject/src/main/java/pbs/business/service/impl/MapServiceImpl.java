@@ -1,5 +1,6 @@
 package pbs.business.service.impl;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,13 @@ import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pbs.base.dao.mapper.PbsDispacherInfoMapperCustom;
 import pbs.base.dao.mapper.PbsRentInfoMapper;
 import pbs.base.dao.mapper.PbsRentInfoMapperCustom;
 import pbs.base.pojo.po.PbsRentInfo;
 import pbs.base.pojo.po.PbsRentInfoExample;
+import pbs.base.pojo.vo.PbsDispacherInfoCustom;
+import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
 import pbs.base.pojo.vo.PbsRentInfoQueryVo;
 import pbs.business.pojo.po.Locations;
@@ -25,6 +29,9 @@ public class MapServiceImpl implements MapService{
 	
 	@Autowired
 	private PbsRentInfoMapperCustom pbsRentInfoMapperCustom;
+	
+	@Autowired
+	private PbsDispacherInfoMapperCustom pbsDispacherInfoMapperCustom;
 	
 	@Override
 	public List<PbsRentInfoCustom> findPbsRentInfoList(PbsRentInfoQueryVo pbsRentInfoQueryVo) throws Exception {
@@ -76,6 +83,33 @@ public class MapServiceImpl implements MapService{
 	    lo.setcLat(Double.parseDouble(lat));
 	    lo.setcLng(Double.parseDouble(lng));
 		return lo;
+	}
+
+	
+	
+	
+	//查询调度信息
+	@Override
+	public List<PbsDispacherInfoCustom> findPbsDispacherInfoList(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo)
+			throws Exception {
+		return pbsRentInfoMapperCustom.findPbsDispacherInfoList(pbsDispacherInfoQueryVo);
+	}
+
+	@Override
+	public int findPbsDispacherInfoCount(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//插入调度信息进入数据库
+	@Override
+	public int savePbsDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom) 
+			throws Exception {
+		//参数校验，非空校验
+		if(pbsDispacherInfoCustom != null){
+			return pbsRentInfoMapperCustom.savePbsDispacherInfo(pbsDispacherInfoCustom);
+		}
+		return 0;
 	}
 
 }
