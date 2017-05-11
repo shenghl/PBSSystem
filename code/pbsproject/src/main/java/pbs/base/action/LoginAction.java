@@ -47,4 +47,8 @@ public class LoginAction {
 		session.invalidate();
 		return "redirect:login.action";
 	}
+	
+	
+	
+	
 }

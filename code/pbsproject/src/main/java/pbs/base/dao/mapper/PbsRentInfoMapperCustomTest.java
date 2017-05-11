@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
 
@@ -22,6 +23,7 @@ public class PbsRentInfoMapperCustomTest {
 	private PbsRentInfoMapper pbsRentInfoMapper;
 	
 	private PbsRentInfoMapperCustom pbsRentInfoMapperCustom;
+	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
@@ -73,4 +75,32 @@ public class PbsRentInfoMapperCustomTest {
 		System.out.println(a);
 	}
 	
+	@Test
+	public void testAddAppUserInfo() throws Exception {
+		PbsAppUserInfoCustom pbsAppUserInfoCustom = new PbsAppUserInfoCustom();
+		pbsAppUserInfoCustom.setAccount("飞享");
+		pbsAppUserInfoCustom.setPassword("123123");
+		int a = pbsRentInfoMapperCustom.addPbsAppUserInfo(pbsAppUserInfoCustom);
+		System.out.println(a);
+	}
+
+	
+	@Test
+	//app用户登录验证
+	public void testFindAppUserInfo() throws Exception {
+		PbsAppUserInfoCustom p = pbsRentInfoMapperCustom.findAppUserByAccount("adf");
+		System.out.println(p.getAccount()+":"+p.getPassword());
+	}
+	
+	@Test
+	//调度任务完成验证
+	public void testUpdateDispacherInfo() throws Exception {
+		PbsDispacherInfoCustom pbsDispacherInfoCustom = new PbsDispacherInfoCustom();
+		pbsDispacherInfoCustom.setFinishTime(new Timestamp(System.currentTimeMillis()));
+		pbsDispacherInfoCustom.setOperator("22");
+		pbsDispacherInfoCustom.setRentId(1310);
+		int a = pbsRentInfoMapperCustom.updateDispacher(pbsDispacherInfoCustom);
+		System.out.println(a);
+	}
+
 }

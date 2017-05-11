@@ -3,6 +3,7 @@ package pbs.business.service;
 import java.util.List;
 
 import pbs.base.pojo.po.PbsRentInfo;
+import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
 import pbs.base.pojo.vo.PbsRentInfoCustom;
@@ -26,6 +27,16 @@ public interface MapService {
 	public List<PbsDispacherInfoCustom> findPbsDispacherInfoList(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo) throws Exception;
 	//查询调度记录条目数
 	public int findPbsDispacherInfoCount(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo) throws Exception;
-	//插入调度信息
+	//添加调度信息
 	public int savePbsDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom ) throws Exception;
+	//调度任务完成处理
+	public int updataDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom ) throws Exception;
+	
+	
+	//app用户注册
+	public int addPbsAppUserInfo(PbsAppUserInfoCustom pbsAppUserInfoCustom ) throws Exception;
+	//app用户登录验证
+	public PbsAppUserInfoCustom findAppUserByAccount(String account,String password) throws Exception;
+
+
 }

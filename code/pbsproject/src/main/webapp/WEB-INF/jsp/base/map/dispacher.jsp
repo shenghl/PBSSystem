@@ -124,6 +124,7 @@
 										<option value="">请选择调运状态</option>
 										<option value="调入">调入</option>
 										<option value="调出">调出</option>
+										<option value="备车">备车</option>
 								</select>
 								</div>
 								<div id="sysuser_groupidTip"></div>

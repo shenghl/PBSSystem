@@ -38,6 +38,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 			return true;
 		}
 		
+		if(url.indexOf(Config.DISPACHER_APP)>=0){
+			return true;
+		}
+		
 		HttpSession session = request.getSession();
 		ActiveUser activeUser = (ActiveUser) session.getAttribute(Config.ACTIVEUSER_KEY);
 		if(activeUser != null){

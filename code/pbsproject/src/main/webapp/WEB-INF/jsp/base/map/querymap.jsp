@@ -31,6 +31,9 @@
       	width:800px;
       }
       
+      #tip{
+      	color:red;
+      }
       
     </style>
     <title>Marker example</title>

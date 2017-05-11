@@ -6,18 +6,52 @@ import java.sql.Timestamp;
 public class PbsDispacherInfo {
 	//主键
 	private int id;
-	
 	//站点ID
 	private int rentId;
-	
-	//状态---"调入","调出"两种
+	//站点名称
+	private String rentName;
+	//状态---"调入","调出"，"备车"三种
 	private String zt;
-	
 	//调入/出的数量
 	private int num;
+	//任务发布时间
+	private Timestamp publishTime;
+	//任务完成时间
+	private Timestamp finishTime;
+	//操作员
+	private String operator;
 	
-	//调动时间
-	private Timestamp time;
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
+	public String getRentName() {
+		return rentName;
+	}
+
+	public void setRentName(String rentName) {
+		this.rentName = rentName;
+	}
+
+	public Timestamp getPublishTime() {
+		return publishTime;
+	}
+
+	public void setPublishTime(Timestamp publishTime) {
+		this.publishTime = publishTime;
+	}
+
+	public Timestamp getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Timestamp finishTime) {
+		this.finishTime = finishTime;
+	}
 
 	public int getId() {
 		return id;
@@ -52,11 +86,11 @@ public class PbsDispacherInfo {
 	}
 
 	public Timestamp getTime() {
-		return time;
+		return publishTime;
 	}
 
-	public void setTime(Timestamp time) {
-		this.time = time;
+	public void setTime(Timestamp publishTime) {
+		this.publishTime = publishTime;
 	}
 	
 	

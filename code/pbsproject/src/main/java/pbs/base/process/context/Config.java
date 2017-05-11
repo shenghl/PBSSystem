@@ -25,6 +25,14 @@ public class Config {
 	 */
 	public static final String WECHAT = "wechat";
 	
+	
+	/**
+	 * app路径
+	 */
+	public static final String DISPACHER_APP = "map";
+	
+	
+	
 	/**
 	 * 系统语言环境，默认为中文zh
 	 */

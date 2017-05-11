@@ -56,17 +56,18 @@
 	SELECT 
 	  dispacher.id,
 	  dispacher.rentId,
+	  dispacher.rentName,
 	  dispacher.zt,
 	  dispacher.num,
-	  dispacher.time
+	  dispacher.publishTime,
+	  dispacher.finishTime,
+	  dispacher.operator
 	FROM
 	  pbs_dispacher_info dispacher
 	<!--  
   <where>
 	<include refid="query_bike"></include>
   </where>
-  
-  
   limit ${pageQuery.start},${pageQuery.rows}
   -->
 	</select>
@@ -86,16 +87,63 @@
 					      "pbs.base.pojo.po.PbsDispacherInfo">
 		insert into pbs_dispacher_info(
 						rentId,
+						rentName,
 						zt,
 						num,
-						time
+						publishTime,
+						finishTime,
+						operator
 						) values(
 						#{rentId},
+						#{rentName},
 						#{zt},
 						#{num},
-						#{time}
+						#{publishTime},
+						#{finishTime},
+						#{operator}
 						)
 	</insert>
 
 
+	<update id="updateDispacher" parameterType="pbs.base.pojo.vo.PbsDispacherInfoCustom">
+		update 
+			pbs_dispacher_info 
+		set
+			finishTime=#{finishTime},
+			operator=#{operator}
+		where
+			rentId=#{rentId} 
+	</update>
+
+
+
+
+
+<!--  以下是app功能-->
+	<insert id="addPbsAppUserInfo" parameterType="pbs.base.pojo.vo.PbsAppUserInfoCustom">
+		insert into 
+			pbs_appuser_info(
+						account,
+						password
+						) values(
+						#{account},
+						#{password}
+						); 
+	</insert>
+
+	
+	<select id="findAppUserByAccount" parameterType="String" resultType="pbs.base.pojo.vo.PbsAppUserInfoCustom">
+			select 
+				account,password 
+			from 
+				pbs_appuser_info 
+			where 
+				account=#{account}
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

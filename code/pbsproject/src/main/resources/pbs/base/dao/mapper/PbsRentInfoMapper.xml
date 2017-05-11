@@ -79,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     ID, ZONE_NAME, ROAD, RENT_NAME, RENT_POSITION, MAX_NUMBER, LAT, LNG, LEFT_OR_RIGHT, 
-    RENT_RANK, AREA_ID, TOP_LIMIT, LOW_LIMIT, C_LAT, C_LNG, OPER_NUM
+    RENT_RANK, AREA_ID, TOP_LIMIT, LOW_LIMIT, C_LAT, C_LNG
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pbs.base.pojo.po.PbsRentInfoExample" >
     select
