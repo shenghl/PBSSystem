@@ -96,7 +96,6 @@ public class PbsRentInfoMapperCustomTest {
 	//调度任务完成验证
 	public void testUpdateDispacherInfo() throws Exception {
 		PbsDispacherInfoCustom pbsDispacherInfoCustom = new PbsDispacherInfoCustom();
-		pbsDispacherInfoCustom.setFinishTime(new Timestamp(System.currentTimeMillis()));
 		pbsDispacherInfoCustom.setOperator("22");
 		pbsDispacherInfoCustom.setRentId(1310);
 		int a = pbsRentInfoMapperCustom.updateDispacher(pbsDispacherInfoCustom);

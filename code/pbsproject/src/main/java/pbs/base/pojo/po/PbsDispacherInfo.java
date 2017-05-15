@@ -17,7 +17,7 @@ public class PbsDispacherInfo {
 	//任务发布时间
 	private Timestamp publishTime;
 	//任务完成时间
-	private Timestamp finishTime;
+	private String finishTime;
 	//操作员
 	private String operator;
 	
@@ -45,11 +45,11 @@ public class PbsDispacherInfo {
 		this.publishTime = publishTime;
 	}
 
-	public Timestamp getFinishTime() {
+	public String getFinishTime() {
 		return finishTime;
 	}
 
-	public void setFinishTime(Timestamp finishTime) {
+	public void setFinishTime(String finishTime) {
 		this.finishTime = finishTime;
 	}
 

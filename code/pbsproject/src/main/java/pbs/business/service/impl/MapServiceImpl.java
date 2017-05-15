@@ -97,7 +97,18 @@ public class MapServiceImpl implements MapService{
 	public List<PbsDispacherInfoCustom> findPbsDispacherInfoList(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo)
 			throws Exception {
 		
-		return pbsRentInfoMapperCustom.findPbsDispacherInfoList(pbsDispacherInfoQueryVo);
+		List<PbsDispacherInfoCustom> list = pbsRentInfoMapperCustom.findPbsDispacherInfoList(pbsDispacherInfoQueryVo);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+//		for(PbsDispacherInfoCustom e : list){
+//			String finish = e.getFinishTime();
+//			if(finish != null){
+//				String finishTime = sdf.format(finish);
+//				e.setFinishTime(finishTime);
+//			}
+//		}
+	
+		
+		return list;
 	}
 
 	//查询调度任务条目数
@@ -174,7 +185,10 @@ public class MapServiceImpl implements MapService{
 	public int updataDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom) throws Exception {
 		int rentId = pbsDispacherInfoCustom.getRentId();
 		if(rentId >0){
-			pbsDispacherInfoCustom.setFinishTime(new Timestamp(System.currentTimeMillis()));
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String finish = sdf.format(time);
+			pbsDispacherInfoCustom.setFinishTime(finish);
 			return pbsRentInfoMapperCustom.updateDispacher(pbsDispacherInfoCustom);
 		}
 		return 0;

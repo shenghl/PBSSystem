@@ -97,7 +97,6 @@ public class MapServiceImplTest {
 	//调度任务完成
 	public void testUpdateDispacherInfo() throws Exception {
 		PbsDispacherInfoCustom pbsDispacherInfoCustom = new PbsDispacherInfoCustom();
-		pbsDispacherInfoCustom.setFinishTime(new Timestamp(System.currentTimeMillis()));
 		pbsDispacherInfoCustom.setOperator("444");
 		pbsDispacherInfoCustom.setRentId(1270);
 		int a = mapService.updataDispacherInfo(pbsDispacherInfoCustom);
