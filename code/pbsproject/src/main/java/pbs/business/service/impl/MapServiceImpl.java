@@ -11,7 +11,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pbs.base.dao.mapper.PbsDispacherInfoMapperCustom;
 import pbs.base.dao.mapper.PbsRentInfoMapper;
 import pbs.base.dao.mapper.PbsRentInfoMapperCustom;
 import pbs.base.pojo.po.PbsRentInfo;
