@@ -78,20 +78,37 @@
 				   //测试总条数   2360  测试通过
 				   console.log("记录总数=="+data.total);
 				   console.log("rentnamelist=="+data.rows[0].id);
+				   console.log("rentnamelist中的operNum=="+data.rows[0].operNum);
 				   //循环输出点位标记
 				  for(var i = 0;i<data.total;i++){
-					  var icon = new AMap.Icon({
-	    					image: '../images/bike/blue.png',
-	    					size: new AMap.Size(36, 36)
-	    				});
+					  var operNum = data.rows[i].operNum;
+					  var maxNumber = data.rows[i].maxNumber;
+					  
+					  if(operNum < 0.2*maxNumber){
+						  var icon = new AMap.Icon({
+		    					image: '../images/bike/green.png',
+		    					size: new AMap.Size(32, 32)
+		    				});
+					  }else if(operNum > 0.8*maxNumber){
+						  var icon = new AMap.Icon({
+		    					image: '../images/bike/red.png',
+		    					size: new AMap.Size(32, 32)
+		    				});
+					  }else{
+						  var icon = new AMap.Icon({
+		    					image: '../images/bike/blue.png',
+		    					size: new AMap.Size(32, 32)
+		    				});
+					  }
+					  
 					  var lng = data.rows[i].cLng;
 					  var lat = data.rows[i].cLat;
 					  
 	    				marker = new AMap.Marker({
 	    					icon: icon,
 	    					position: [lng,lat],
-	    					offset: new AMap.Pixel(-10,10),
-	    					title: data.rows[i].id+":"+data.rows[i].rentName,
+	    					offset: new AMap.Pixel(-16,-32),
+	    					title: data.rows[i].id+":"+data.rows[i].rentName+",在架"+data.rows[i].operNum+",最大储量"+data.rows[i].maxNumber,
 	    					map: map
 	    				});
 				  }
