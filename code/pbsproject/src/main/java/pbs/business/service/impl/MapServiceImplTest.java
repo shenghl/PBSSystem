@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
@@ -109,5 +110,32 @@ public class MapServiceImplTest {
 		int a = mapService.updateAppUserChangePWD("444", "444","123456" );
 		System.out.println(a);
 	}
+	
+	@Test
+	//注册时车辆信息添加
+	public void testaddAppCar() throws Exception {
+		PbsAppCarInfoCustom pbsAppCarInfoCustom = new PbsAppCarInfoCustom();
+		pbsAppCarInfoCustom.setCarType(null);
+		pbsAppCarInfoCustom.setPlateNumber("浙A00000");
+		pbsAppCarInfoCustom.setArea(null);
+		pbsAppCarInfoCustom.setOperator("99");
+		int a = mapService.addPbsAppCarInfo(pbsAppCarInfoCustom);
+		System.out.println(a);
+	}
+	
+	@Test
+	//车辆信息查询
+	public void testfindAppCar() throws Exception {
+		
+		List<PbsAppCarInfoCustom> pbsAppCarInfoCustom = mapService.findAppCarByAccount("99");
+		for(PbsAppCarInfoCustom e : pbsAppCarInfoCustom){
+			
+			System.out.println(e.getOperator()+","+e.getPlateNumber());
+		}
+	}
+	
+	
+	
+	
 	
 }

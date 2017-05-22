@@ -2,6 +2,7 @@ package pbs.base.dao.mapper;
 
 import java.util.List;
 
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
@@ -34,5 +35,12 @@ public interface PbsRentInfoMapperCustom {
 	public PbsAppUserInfoCustom findAppUserByAccount(String account) throws Exception;
 	//app用户修改密码
 	public int updateAppUserChangePWD(PbsAppUserInfoCustom pbsAppUserInfoCustom) throws Exception;
+	
+	
+	
+	//app插入车辆信息
+	public int addPbsAppCarInfo(PbsAppCarInfoCustom pbsAppCarInfoCustom)throws Exception;
+	//app车辆信息查询
+	public List<PbsAppCarInfoCustom> findAppCarByAccount(String operator) throws Exception;
 
 }

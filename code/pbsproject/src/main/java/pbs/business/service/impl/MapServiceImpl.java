@@ -15,6 +15,7 @@ import pbs.base.dao.mapper.PbsRentInfoMapper;
 import pbs.base.dao.mapper.PbsRentInfoMapperCustom;
 import pbs.base.pojo.po.PbsRentInfo;
 import pbs.base.pojo.po.PbsRentInfoExample;
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
@@ -209,6 +210,20 @@ public class MapServiceImpl implements MapService{
 		}else{
 			return 0;
 		}
+	}
+
+	@Override
+	//注册时车辆信息插入
+	public int addPbsAppCarInfo(PbsAppCarInfoCustom pbsAppCarInfoCustom) throws Exception {
+		int a = pbsRentInfoMapperCustom.addPbsAppCarInfo(pbsAppCarInfoCustom);
+		return a;
+	}
+
+	@Override
+	//app车辆信息查询
+	public List<PbsAppCarInfoCustom> findAppCarByAccount(String operator) throws Exception {
+		List<PbsAppCarInfoCustom> pbsAppCarInfoCustom = pbsRentInfoMapperCustom.findAppCarByAccount(operator);
+		return pbsAppCarInfoCustom;
 	}
 
 }

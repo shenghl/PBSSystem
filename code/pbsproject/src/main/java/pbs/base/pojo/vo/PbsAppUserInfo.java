@@ -1,4 +1,4 @@
-package pbs.base.pojo.po;
+package pbs.base.pojo.vo;
 
 public class PbsAppUserInfo {
 	//主键

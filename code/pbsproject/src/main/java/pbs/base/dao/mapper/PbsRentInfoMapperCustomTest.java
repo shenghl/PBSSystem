@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
@@ -111,4 +112,28 @@ public class PbsRentInfoMapperCustomTest {
 		int a  = pbsRentInfoMapperCustom.updateAppUserChangePWD(pbsAppUserInfoCustom);
 		System.out.println(a);
 	}
+	
+	@Test
+	//车辆信息插入
+	public void testAddAppCarInfo() throws Exception {
+		PbsAppCarInfoCustom pbsAppCarInfoCustom = new PbsAppCarInfoCustom();
+		pbsAppCarInfoCustom.setCarType("陕汽");
+		pbsAppCarInfoCustom.setPlateNumber("浙A99999");
+		pbsAppCarInfoCustom.setArea(null);
+		pbsAppCarInfoCustom.setOperator("000000");
+		int a = pbsRentInfoMapperCustom.addPbsAppCarInfo(pbsAppCarInfoCustom);
+		
+		System.out.println(a);
+	}
+	
+	@Test
+	//车辆信息查询
+	public void testFindCarInfo() throws Exception {
+		List<PbsAppCarInfoCustom> pbsAppCarInfoCustom = pbsRentInfoMapperCustom.findAppCarByAccount("99");
+		for(PbsAppCarInfoCustom e : pbsAppCarInfoCustom){
+			System.out.println(e.getOperator()+","+e.getPlateNumber());
+			
+		}
+	}
+	
 }

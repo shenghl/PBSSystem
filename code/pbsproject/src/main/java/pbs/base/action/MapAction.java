@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pbs.base.pojo.po.PbsBikeInfo;
 import pbs.base.pojo.vo.PageQuery;
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoCustom;
 import pbs.base.pojo.vo.PbsBikeInfoQueryVo;
@@ -111,16 +112,27 @@ public class MapAction {
 	
 		//app用户注册
 		@RequestMapping("/app_userReg")
-		public @ResponseBody SubmitResultInfo app_dispacher(String account,String password)throws Exception{
+		public @ResponseBody SubmitResultInfo app_dispacher(String account,String password,String car)throws Exception{
 			
 			PbsAppUserInfoCustom pbsAppUserInfoCustom = new PbsAppUserInfoCustom();
 			pbsAppUserInfoCustom.setAccount(account);
 			pbsAppUserInfoCustom.setPassword(password);
+			pbsAppUserInfoCustom.setCar(car);
 			
 			int a = mapService.addPbsAppUserInfo(pbsAppUserInfoCustom);
 			
+			//车辆信息填写
+			PbsAppCarInfoCustom pbsAppCarInfoCustom = new PbsAppCarInfoCustom();
+			pbsAppCarInfoCustom.setCarType(null);
+			pbsAppCarInfoCustom.setOperator(account);
+			pbsAppCarInfoCustom.setArea(null);
+			pbsAppCarInfoCustom.setPlateNumber(car);
+			
 			ResultInfo resultInfo = new ResultInfo();
 			if(a>0){
+				//向car表格填写数据
+				mapService.addPbsAppCarInfo(pbsAppCarInfoCustom);
+				//返回信息
 				resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
 				resultInfo.setMessage("操作成功");
 				resultInfo.setType(1);
@@ -214,27 +226,66 @@ public class MapAction {
 		}
 		
 		
-			//app用户修改密码
-				@RequestMapping("/app_changePWD")
-				public @ResponseBody SubmitResultInfo app_changePWD(
-						String account,String oldpassword,String newpassword)
-						throws Exception{
-					//调用mapService中的方法
-					int a = mapService.updateAppUserChangePWD(account, oldpassword, newpassword);
-					
-					ResultInfo resultInfo = new ResultInfo();
-					if(a>0){
-						resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
-						resultInfo.setMessage("操作成功");
-						resultInfo.setType(1);
-					}else{
-						resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
-						resultInfo.setMessage("原密码不正确");
-						resultInfo.setType(0);
-					}
-					
-					SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
-					return submitResultInfo;
+		//app用户修改密码
+			@RequestMapping("/app_changePWD")
+			public @ResponseBody SubmitResultInfo app_changePWD(
+					String account,String oldpassword,String newpassword)
+					throws Exception{
+				//调用mapService中的方法
+				int a = mapService.updateAppUserChangePWD(account, oldpassword, newpassword);
+				
+				ResultInfo resultInfo = new ResultInfo();
+				if(a>0){
+					resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+					resultInfo.setMessage("操作成功");
+					resultInfo.setType(1);
+				}else{
+					resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+					resultInfo.setMessage("原密码不正确");
+					resultInfo.setType(0);
 				}
+				
+				SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+				return submitResultInfo;
+			}
+			
+			
+			//app车辆信息查询
+			@RequestMapping("/app_car")
+			public @ResponseBody DataGridResultInfo app_car(
+					String operator
+					)throws Exception{
+				//获取车辆信息list
+				List<PbsAppCarInfoCustom> pbsAppCarInfoCustom = mapService.findAppCarByAccount(operator);
+				
+				//新建DataGridResultInfo数据存储查询信息
+				DataGridResultInfo dataGridResultInfo = new DataGridResultInfo();
+				
+				//设置总条数进入dataGridResultInfo
+				dataGridResultInfo.setTotal(pbsAppCarInfoCustom.size());
+				
+				//设置结果集进入Row
+				dataGridResultInfo.setRows(pbsAppCarInfoCustom);
+				
+				//System.out.println(dataGridResultInfo.getTotal());
+				//返回
+				return dataGridResultInfo;
+			}	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 }

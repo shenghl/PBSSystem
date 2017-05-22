@@ -3,6 +3,7 @@ package pbs.business.service;
 import java.util.List;
 
 import pbs.base.pojo.po.PbsRentInfo;
+import pbs.base.pojo.vo.PbsAppCarInfoCustom;
 import pbs.base.pojo.vo.PbsAppUserInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoCustom;
 import pbs.base.pojo.vo.PbsDispacherInfoQueryVo;
@@ -40,4 +41,10 @@ public interface MapService {
 	//app用户密码修改
 	public int updateAppUserChangePWD(String account,String oldpassword,String newpassword) throws Exception;
 
+	
+	
+	//车辆信息插入
+	public int addPbsAppCarInfo(PbsAppCarInfoCustom pbsAppCarInfoCustom)throws Exception;
+	//app车辆信息查询
+	public List<PbsAppCarInfoCustom> findAppCarByAccount(String operator) throws Exception;
 }

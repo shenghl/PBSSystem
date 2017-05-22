@@ -128,10 +128,12 @@
 		insert into 
 			pbs_appuser_info(
 						account,
-						password
+						password,
+						car
 						) values(
 						#{account},
-						#{password}
+						#{password},
+						#{car}
 						); 
 	</insert>
 
@@ -154,6 +156,32 @@
 		where
 			account=#{account} 
 	</update>
+	
+	<!-- app车辆信息插入 -->
+	<insert id="addPbsAppCarInfo" parameterType="pbs.base.pojo.vo.PbsAppCarInfoCustom">
+		insert into 
+			pbs_car_info(
+						carType,
+						plateNumber,
+						area,
+						operator
+						) values(
+						#{carType},
+						#{plateNumber},
+						#{area},
+						#{operator}
+						); 
+	</insert>
+	
+	<!-- app车辆信息查询 -->
+	<select id="findAppCarByAccount" parameterType="String" resultType="pbs.base.pojo.vo.PbsAppCarInfoCustom">
+			select 
+				carType,plateNumber,area,operator
+			from 
+				pbs_car_info 
+			where 
+				operator=#{operator}
+	</select>
 	
 	
 	
