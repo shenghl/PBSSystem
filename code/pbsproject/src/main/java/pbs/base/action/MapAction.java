@@ -213,4 +213,28 @@ public class MapAction {
 			return submitResultInfo;
 		}
 		
+		
+			//app用户修改密码
+				@RequestMapping("/app_changePWD")
+				public @ResponseBody SubmitResultInfo app_changePWD(
+						String account,String oldpassword,String newpassword)
+						throws Exception{
+					//调用mapService中的方法
+					int a = mapService.updateAppUserChangePWD(account, oldpassword, newpassword);
+					
+					ResultInfo resultInfo = new ResultInfo();
+					if(a>0){
+						resultInfo.setType(ResultInfo.TYPE_RESULT_SUCCESS);
+						resultInfo.setMessage("操作成功");
+						resultInfo.setType(1);
+					}else{
+						resultInfo.setType(ResultInfo.TYPE_RESULT_FAIL);
+						resultInfo.setMessage("原密码不正确");
+						resultInfo.setType(0);
+					}
+					
+					SubmitResultInfo submitResultInfo = new SubmitResultInfo(resultInfo);
+					return submitResultInfo;
+				}
+		
 }

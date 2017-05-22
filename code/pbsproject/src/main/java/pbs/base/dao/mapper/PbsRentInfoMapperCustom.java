@@ -23,7 +23,7 @@ public interface PbsRentInfoMapperCustom {
 	public int findPbsDispacherInfoCount(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo) throws Exception;
 	//插入调度信息
 	public int savePbsDispacherInfo(PbsDispacherInfoCustom PbsDispacherInfoCustom ) throws Exception;
-	//调度任务的完成操作
+	//app调度任务的完成操作
 	public int updateDispacher(PbsDispacherInfoCustom PbsDispacherInfoCustom) throws Exception;
 	
 	
@@ -32,5 +32,7 @@ public interface PbsRentInfoMapperCustom {
 	public int addPbsAppUserInfo(PbsAppUserInfoCustom pbsAppUserInfoCustom ) throws Exception;
 	//app用户登录验证
 	public PbsAppUserInfoCustom findAppUserByAccount(String account) throws Exception;
+	//app用户修改密码
+	public int updateAppUserChangePWD(PbsAppUserInfoCustom pbsAppUserInfoCustom) throws Exception;
 
 }

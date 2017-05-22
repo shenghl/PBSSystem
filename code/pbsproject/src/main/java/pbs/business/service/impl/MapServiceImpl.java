@@ -127,8 +127,6 @@ public class MapServiceImpl implements MapService{
 		if(pbsDispacherInfoCustom != null){
 			//设置发布时间
 			pbsDispacherInfoCustom.setTime(new Timestamp(System.currentTimeMillis()));
-			
-			
 			//设置所发布任务的站点名称
 			//获取站点ID
 			int rentId = pbsDispacherInfoCustom.getRentId();
@@ -191,6 +189,26 @@ public class MapServiceImpl implements MapService{
 			return pbsRentInfoMapperCustom.updateDispacher(pbsDispacherInfoCustom);
 		}
 		return 0;
+	}
+
+	@Override
+	//APP用户密码修改
+	public int updateAppUserChangePWD(String account,String oldpassword,String newpassword) throws Exception {
+		//根据用户查询密码，并与数据库查询结果进行比较
+		PbsAppUserInfoCustom user = pbsRentInfoMapperCustom.findAppUserByAccount(account);
+		//查询数据里里面的账户密码
+		String pwd = user.getPassword();
+		
+		//如果密码验证通过，修改密码
+		if(pwd.equals(oldpassword)){
+			PbsAppUserInfoCustom pbsAppUserInfoCustom = new PbsAppUserInfoCustom();
+			pbsAppUserInfoCustom.setAccount(account);
+			pbsAppUserInfoCustom.setPassword(newpassword);
+			int a = pbsRentInfoMapperCustom.updateAppUserChangePWD(pbsAppUserInfoCustom);
+			return a;
+		}else{
+			return 0;
+		}
 	}
 
 }

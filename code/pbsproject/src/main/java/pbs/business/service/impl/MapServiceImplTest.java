@@ -103,4 +103,11 @@ public class MapServiceImplTest {
 		System.out.println(a);
 	}
 	
+	@Test
+	//app用户密码修改
+	public void testUpdateAppUserPWD() throws Exception {
+		int a = mapService.updateAppUserChangePWD("444", "444","123456" );
+		System.out.println(a);
+	}
+	
 }

@@ -29,7 +29,7 @@ public interface MapService {
 	public int findPbsDispacherInfoCount(PbsDispacherInfoQueryVo pbsDispacherInfoQueryVo) throws Exception;
 	//添加调度信息
 	public int savePbsDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom ) throws Exception;
-	//调度任务完成处理
+	//app调度任务完成处理
 	public int updataDispacherInfo(PbsDispacherInfoCustom pbsDispacherInfoCustom ) throws Exception;
 	
 	
@@ -37,6 +37,7 @@ public interface MapService {
 	public int addPbsAppUserInfo(PbsAppUserInfoCustom pbsAppUserInfoCustom ) throws Exception;
 	//app用户登录验证
 	public PbsAppUserInfoCustom findAppUserByAccount(String account,String password) throws Exception;
-
+	//app用户密码修改
+	public int updateAppUserChangePWD(String account,String oldpassword,String newpassword) throws Exception;
 
 }

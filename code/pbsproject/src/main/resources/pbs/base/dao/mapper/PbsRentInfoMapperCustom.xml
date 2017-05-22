@@ -84,6 +84,8 @@
 	</where>
 	-->
 	</select>
+	
+	<!-- 调度任务发布 -->
 <insert id="savePbsDispacherInfo" parameterType=
 					      "pbs.base.pojo.po.PbsDispacherInfo">
 		insert into pbs_dispacher_info(
@@ -105,7 +107,7 @@
 						)
 	</insert>
 
-
+	<!-- 调度任务完成提交 -->
 	<update id="updateDispacher" parameterType="pbs.base.pojo.vo.PbsDispacherInfoCustom">
 		update 
 			pbs_dispacher_info 
@@ -121,6 +123,7 @@
 
 
 <!--  以下是app功能-->
+	<!-- app用户注册 -->
 	<insert id="addPbsAppUserInfo" parameterType="pbs.base.pojo.vo.PbsAppUserInfoCustom">
 		insert into 
 			pbs_appuser_info(
@@ -132,7 +135,7 @@
 						); 
 	</insert>
 
-	
+	<!-- app登录验证 -->
 	<select id="findAppUserByAccount" parameterType="String" resultType="pbs.base.pojo.vo.PbsAppUserInfoCustom">
 			select 
 				account,password 
@@ -142,8 +145,15 @@
 				account=#{account}
 	</select>
 	
-	
-	
+	<!-- 修改app密码 -->
+	<update id="updateAppUserChangePWD" parameterType="pbs.base.pojo.vo.PbsAppUserInfoCustom">
+		update 
+			pbs_appuser_info 
+		set
+			password=#{password}
+		where
+			account=#{account} 
+	</update>
 	
 	
 	

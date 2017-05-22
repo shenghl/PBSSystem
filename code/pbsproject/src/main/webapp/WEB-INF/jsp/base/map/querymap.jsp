@@ -48,13 +48,6 @@
 		<div class="button-group">
 		    <input type="button" class="button" value="打开调度窗口" onClick="javascript:openInfo()"/>
 		      <input type="button" class="button" value="关闭调度窗体" onClick="javascript:infoWindow.close()"/>
-		    <!--
-		    <input type="button" style="position:fixed" value="按钮"/>
-		    -->
-		    
-		    <!--  
-		    <iframe width=420 height=330 frameborder=0 scrolling=auto src=${baseurl}dispacher.action></iframe>
-		    -->
 		</div>
 		<div id="tip">
 		   点击页面右下角按钮即可开始调度
@@ -81,29 +74,34 @@
 				   console.log("rentnamelist中的operNum=="+data.rows[0].operNum);
 				   //循环输出点位标记
 				  for(var i = 0;i<data.total;i++){
+					  //定义变量，在架数目，最大数目
 					  var operNum = data.rows[i].operNum;
 					  var maxNumber = data.rows[i].maxNumber;
 					  
+					  //根据在架数目不同显示不同图标
+					  //低储量时
 					  if(operNum < 0.2*maxNumber){
 						  var icon = new AMap.Icon({
 		    					image: '../images/bike/green.png',
 		    					size: new AMap.Size(32, 32)
 		    				});
+						//高储量时
 					  }else if(operNum > 0.8*maxNumber){
 						  var icon = new AMap.Icon({
 		    					image: '../images/bike/red.png',
 		    					size: new AMap.Size(32, 32)
 		    				});
+						 //两者之间
 					  }else{
 						  var icon = new AMap.Icon({
 		    					image: '../images/bike/blue.png',
 		    					size: new AMap.Size(32, 32)
 		    				});
 					  }
-					  
+					  //定义经纬度
 					  var lng = data.rows[i].cLng;
 					  var lat = data.rows[i].cLat;
-					  
+				  		//根据经纬度添加图标，设置图标中心点，鼠标悬停显示内容
 	    				marker = new AMap.Marker({
 	    					icon: icon,
 	    					position: [lng,lat],
@@ -140,7 +138,7 @@
     		//var $div = $(div);
     		//$("#container").append($div);
     		
-    		//添加iframe
+    		//添加iframe，在本窗口打开新页面
     		var info = [];
     		info.push("<iframe  width=800  frameborder=0 scrolling=auto src=${baseurl}dispacher.action>");
     		infoWindow = new AMap.InfoWindow({

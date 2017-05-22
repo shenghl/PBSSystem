@@ -102,4 +102,13 @@ public class PbsRentInfoMapperCustomTest {
 		System.out.println(a);
 	}
 
+	@Test
+	//app用户修改密码
+	public void testUpdateAppUserPWDInfo() throws Exception {
+		PbsAppUserInfoCustom pbsAppUserInfoCustom = new PbsAppUserInfoCustom();
+		pbsAppUserInfoCustom.setAccount("44");
+		pbsAppUserInfoCustom.setPassword("123456");
+		int a  = pbsRentInfoMapperCustom.updateAppUserChangePWD(pbsAppUserInfoCustom);
+		System.out.println(a);
+	}
 }
